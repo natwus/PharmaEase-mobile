@@ -1,6 +1,6 @@
 import { NativeBaseProvider, StatusBar } from 'native-base';
 import Rotas from './src/rotas';
-import {Temas} from './src/estilos/temas'
+import { Temas } from './src/estilos/temas'
 import api from './src/servicos/api';
 import { useEffect } from 'react';
 

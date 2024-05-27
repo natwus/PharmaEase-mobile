@@ -6,7 +6,6 @@ interface InputProps {
     secureTextEntry?: boolean;
     value?:string;
     onChangeText?:(text:string) => void;
-    isRequired?:boolean
 }
 
 export function EntradaTexto({ 
@@ -15,7 +14,6 @@ export function EntradaTexto({
     placeholder, 
     value,
     onChangeText,
-    isRequired
 }: InputProps): JSX.Element {
     return (
         <FormControl mt={3}>
@@ -33,7 +31,6 @@ export function EntradaTexto({
                 secureTextEntry={secureTextEntry} 
                 value={value}
                 onChangeText={onChangeText}
-                isRequired={true}
             />
         </FormControl>
     );
