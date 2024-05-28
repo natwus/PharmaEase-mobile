@@ -5,102 +5,41 @@ import { Botao } from "../componentes/Botao";
 import Logo from '../assets/Logo.png';
 import { Titulo } from "../componentes/titulo";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-
-const depoimentos = [
-    {
-        texto: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sit amet justo non tellus ornare blandit sit amet ut augue. Maecenas tortor tortor, imperdiet a mi non, maximus vulputate nisi. Donec nec arcu ex. Nam commodo sodales augue sed vulputate. Morbi et mattis dui. Suspendisse maximus, nibh non sodales commodo, elit sapien tincidunt nibh, at varius orci purus sit amet neque.",
-        pessoa: "Mareus Senai, 299 anos, Votuporanga/SP"
-    },
-    {
-        texto: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sit amet justo non tellus ornare blandit sit amet ut augue. Maecenas tortor tortor, imperdiet a mi non, maximus vulputate nisi. Donec nec arcu ex. Nam commodo sodales augue sed vulputate. Morbi et mattis dui. Suspendisse maximus, nibh non sodales commodo, elit sapien tincidunt nibh, at varius orci purus sit amet neque.",
-        pessoa: "Mareus Senai, 299 anos, Votuporanga/SP"
-    },
-    {
-        texto: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sit amet justo non tellus ornare blandit sit amet ut augue. Maecenas tortor tortor, imperdiet a mi non, maximus vulputate nisi. Donec nec arcu ex. Nam commodo sodales augue sed vulputate. Morbi et mattis dui. Suspendisse maximus, nibh non sodales commodo, elit sapien tincidunt nibh, at varius orci purus sit amet neque.",
-        pessoa: "Mareus Senai, 299 anos, Votuporanga/SP"
-    },
-    {
-        texto: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sit amet justo non tellus ornare blandit sit amet ut augue. Maecenas tortor tortor, imperdiet a mi non, maximus vulputate nisi. Donec nec arcu ex. Nam commodo sodales augue sed vulputate. Morbi et mattis dui. Suspendisse maximus, nibh non sodales commodo, elit sapien tincidunt nibh, at varius orci purus sit amet neque.",
-        pessoa: "Mareus Senai, 299 anos, Votuporanga/SP"
-    },
-    {
-        texto: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sit amet justo non tellus ornare blandit sit amet ut augue. Maecenas tortor tortor, imperdiet a mi non, maximus vulputate nisi. Donec nec arcu ex. Nam commodo sodales augue sed vulputate. Morbi et mattis dui. Suspendisse maximus, nibh non sodales commodo, elit sapien tincidunt nibh, at varius orci purus sit amet neque.",
-        pessoa: "Mareus Senai, 299 anos, Votuporanga/SP"
-    },
-    {
-        texto: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sit amet justo non tellus ornare blandit sit amet ut augue. Maecenas tortor tortor, imperdiet a mi non, maximus vulputate nisi. Donec nec arcu ex. Nam commodo sodales augue sed vulputate. Morbi et mattis dui. Suspendisse maximus, nibh non sodales commodo, elit sapien tincidunt nibh, at varius orci purus sit amet neque.",
-        pessoa: "Mareus Senai, 299 anos, Votuporanga/SP"
-    },
-    {
-        texto: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sit amet justo non tellus ornare blandit sit amet ut augue. Maecenas tortor tortor, imperdiet a mi non, maximus vulputate nisi. Donec nec arcu ex. Nam commodo sodales augue sed vulputate. Morbi et mattis dui. Suspendisse maximus, nibh non sodales commodo, elit sapien tincidunt nibh, at varius orci purus sit amet neque.",
-        pessoa: "Mareus Senai, 299 anos, Votuporanga/SP"
-    },
-    {
-        texto: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sit amet justo non tellus ornare blandit sit amet ut augue. Maecenas tortor tortor, imperdiet a mi non, maximus vulputate nisi. Donec nec arcu ex. Nam commodo sodales augue sed vulputate. Morbi et mattis dui. Suspendisse maximus, nibh non sodales commodo, elit sapien tincidunt nibh, at varius orci purus sit amet neque.",
-        pessoa: "Mareus Senai, 299 anos, Votuporanga/SP"
-    },
-    {
-        texto: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sit amet justo non tellus ornare blandit sit amet ut augue. Maecenas tortor tortor, imperdiet a mi non, maximus vulputate nisi. Donec nec arcu ex. Nam commodo sodales augue sed vulputate. Morbi et mattis dui. Suspendisse maximus, nibh non sodales commodo, elit sapien tincidunt nibh, at varius orci purus sit amet neque.",
-        pessoa: "Mareus Senai, 299 anos, Votuporanga/SP"
-    },
-    {
-        texto: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sit amet justo non tellus ornare blandit sit amet ut augue. Maecenas tortor tortor, imperdiet a mi non, maximus vulputate nisi. Donec nec arcu ex. Nam commodo sodales augue sed vulputate. Morbi et mattis dui. Suspendisse maximus, nibh non sodales commodo, elit sapien tincidunt nibh, at varius orci purus sit amet neque.",
-        pessoa: "Mareus Senai, 299 anos, Votuporanga/SP"
-    },
-    {
-        texto: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sit amet justo non tellus ornare blandit sit amet ut augue. Maecenas tortor tortor, imperdiet a mi non, maximus vulputate nisi. Donec nec arcu ex. Nam commodo sodales augue sed vulputate. Morbi et mattis dui. Suspendisse maximus, nibh non sodales commodo, elit sapien tincidunt nibh, at varius orci purus sit amet neque.",
-        pessoa: "Mareus Senai, 299 anos, Votuporanga/SP"
-    },
-    {
-        texto: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sit amet justo non tellus ornare blandit sit amet ut augue. Maecenas tortor tortor, imperdiet a mi non, maximus vulputate nisi. Donec nec arcu ex. Nam commodo sodales augue sed vulputate. Morbi et mattis dui. Suspendisse maximus, nibh non sodales commodo, elit sapien tincidunt nibh, at varius orci purus sit amet neque.",
-        pessoa: "Mareus Senai, 299 anos, Votuporanga/SP"
-    },
-    {
-        texto: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sit amet justo non tellus ornare blandit sit amet ut augue. Maecenas tortor tortor, imperdiet a mi non, maximus vulputate nisi. Donec nec arcu ex. Nam commodo sodales augue sed vulputate. Morbi et mattis dui. Suspendisse maximus, nibh non sodales commodo, elit sapien tincidunt nibh, at varius orci purus sit amet neque.",
-        pessoa: "Mareus Senai, 299 anos, Votuporanga/SP"
-    },
-    {
-        texto: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sit amet justo non tellus ornare blandit sit amet ut augue. Maecenas tortor tortor, imperdiet a mi non, maximus vulputate nisi. Donec nec arcu ex. Nam commodo sodales augue sed vulputate. Morbi et mattis dui. Suspendisse maximus, nibh non sodales commodo, elit sapien tincidunt nibh, at varius orci purus sit amet neque.",
-        pessoa: "Mareus Senai, 299 anos, Votuporanga/SP"
-    },
-    {
-        texto: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sit amet justo non tellus ornare blandit sit amet ut augue. Maecenas tortor tortor, imperdiet a mi non, maximus vulputate nisi. Donec nec arcu ex. Nam commodo sodales augue sed vulputate. Morbi et mattis dui. Suspendisse maximus, nibh non sodales commodo, elit sapien tincidunt nibh, at varius orci purus sit amet neque.",
-        pessoa: "Mareus Senai, 299 anos, Votuporanga/SP"
-    },
-    {
-        texto: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sit amet justo non tellus ornare blandit sit amet ut augue. Maecenas tortor tortor, imperdiet a mi non, maximus vulputate nisi. Donec nec arcu ex. Nam commodo sodales augue sed vulputate. Morbi et mattis dui. Suspendisse maximus, nibh non sodales commodo, elit sapien tincidunt nibh, at varius orci purus sit amet neque.",
-        pessoa: "Mareus Senai, 299 anos, Votuporanga/SP"
-    },
-]
+import { depoimentos } from "../utils/mock";
 
 export default function Principal() {
     return (
-        <ScrollView>
-            <VStack p={5}>
-                <VStack>
-                    <Image source={Logo} alt='Logo'></Image>
-                    <Titulo color={"blue.500"} mb={5}>
-                        Boas-Vindas!
-                    </Titulo>
-                </VStack>
-                <VStack>
-                    <Box p={5} borderRadius={'lg'} bgColor={'white'} w={'100%'}>
-                        <EntradaTexto placeholder="Digite a especialidade"></EntradaTexto>
-                        <EntradaTexto placeholder="Digite sua localização"></EntradaTexto>
-                        <Botao>Buscar</Botao>
-                    </Box>
-                </VStack>
-                <VStack>
-                    <Titulo alignSelf={'center'} color={'blue.800'} mb={5}>Depoimentos</Titulo>
-                    {depoimentos.map((depoimento, index)=>(
-                        <VStack key={index}>
-                            <Text mb={2}>{depoimento.texto}</Text>
-                            <Text alignSelf={'center'} color={'gray.500'} fontWeight={'bold'}>{depoimento.pessoa}</Text>
-                            <Divider mb={4}/>
-                        </VStack>
-                    ))}
-                </VStack>
-            </VStack>
-        </ScrollView>
+        <ScrollView flex={1} bgColor="white">
+      <VStack flex={1} alignItems="flex-start" justifyContent="flex-start" p={5}>
+        <Image source={Logo} alt="Logo" mt={10} />
+        <Titulo color="blue.500">Boas-vindas!</Titulo>
+
+        <Box w="100%" borderRadius="lg" p={3} mt={10} shadow="1" borderRightRadius="md">
+          <EntradaTexto
+            placeholder="Digite a especialidade"
+          />
+          <EntradaTexto
+            placeholder="Digite sua localização"
+          />
+          <Botao mt={3} mb={3}>
+            Buscar
+          </Botao>
+        </Box>
+
+        <Titulo color="blue.800" alignSelf="center">Depoimentos</Titulo>
+        <VStack space={3} divider={<Divider />} w="100%">
+          {
+            depoimentos.map(depoimento => (
+              <Box key={depoimento.id} w="100%" borderRadius="lg" p={3}>
+                <Text color="gray.300" fontSize="md" textAlign="justify">
+                  {depoimento.text}
+                </Text>
+                <Text color="gray.500" fontSize="lg" fontWeight="bold" alignSelf="center" mt="2">{depoimento.titulo}</Text>
+              </Box>
+            ))
+          }
+        </VStack>
+      </VStack>
+    </ScrollView>
     )
 }

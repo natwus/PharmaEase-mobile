@@ -5,9 +5,9 @@ interface CardProps {
     nome: string;
     foto: string;
     especialidade: string;
-    data: string;
-    foiAtendido: boolean;
-    foiAgendado: boolean;
+    data?: string;
+    foiAtendido?: boolean;
+    foiAgendado?: boolean;
 }
 
 export function CardConsulta({

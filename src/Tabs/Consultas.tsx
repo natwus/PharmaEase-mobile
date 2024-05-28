@@ -1,9 +1,15 @@
-import { VStack, Text } from "native-base";
-import { CardConsulta } from "../componentes/CardConsulta";
+import { VStack, Divider, ScrollView } from 'native-base'
+import { Botao } from '../componentes/Botao'
+import { CardConsulta } from '../componentes/CardConsulta'
+import { Titulo } from '../componentes/titulo'
 
-export default function Consultas(){
-    return(
-        <VStack p={5}>
+export default function Consultas() {
+    return (
+        <ScrollView p="5">
+            <Titulo color="blue.500">Minhas consultas</Titulo>
+            <Botao mt={5} mb={5}>Agendar nova consulta</Botao>
+
+            <Titulo color="blue.500" fontSize="lg" alignSelf="flex-start" mb={2}>Próximas consultas</Titulo>
             <CardConsulta
                 nome="Dra. Kelly Nguissa"
                 especialidade="Pediatra"
@@ -12,6 +18,31 @@ export default function Consultas(){
                 foiAgendado
                 foiAtendido={false}
             />
-        </VStack>
+
+            <Divider mt={5} />
+
+            <Titulo color="blue.500" fontSize="lg" alignSelf="flex-start" mb={2}>Consultas passadas</Titulo>
+            <CardConsulta
+                nome='Dr. Roberto Moraes'
+                especialidade='Cardiologista'
+                foto='https://github.com/robertoSRMJunior.png'
+                data='20/04/2023'
+                foiAtendido
+            />
+            <CardConsulta
+                nome='Dr. Roberto Moraes'
+                especialidade='Cardiologista'
+                foto='https://github.com/robertoSRMJunior.png'
+                data='20/04/2023'
+                foiAtendido
+            />
+            <CardConsulta
+                nome='Dr. Roberto Moraes'
+                especialidade='Cardiologista'
+                foto='https://github.com/robertoSRMJunior.png'
+                data='20/04/2023'
+                foiAtendido
+            />
+        </ScrollView>
     )
 }
