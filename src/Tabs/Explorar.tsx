@@ -12,14 +12,14 @@ const consultas = [
         nome: "Dr. Jalim Rabei",
         data: "22/05/2024",
         foiAgendado: false,
-        foiAtendido: true,
+        foiAtendido: false,
     },
     {
         especialidade: "Dermatologista",
         foto: "https://p16-flow-sign-va.ciciai.com/ocean-cloud-tos-us/4913df5a0ae54c8a95fdc1130282dd89.png~tplv-6bxrjdptv7-image.png?rk3s=18ea6f23&x-expires=1747936840&x-signature=%2BZ71iZD60wnnz0VObLZDnroXF5E%3D",
         nome: "Dra. Paula Tejando",
         data: "23/05/2024",
-        foiAgendado: true,
+        foiAgendado: false,
         foiAtendido: false,
     },
     {
@@ -27,7 +27,7 @@ const consultas = [
         foto: "https://p16-flow-sign-va.ciciai.com/ocean-cloud-tos-us/61b2212496d744a9b283e3e9145fef4c.png~tplv-6bxrjdptv7-image.png?rk3s=18ea6f23&x-expires=1747936887&x-signature=Q2sjnMCh0HCnBILhfH0D3o6r5cg%3D",
         nome: "Dr. Paulo Brificado",
         data: "24/05/2024",
-        foiAgendado: true,
+        foiAgendado: false,
         foiAtendido: false,
     },
     {
@@ -35,7 +35,7 @@ const consultas = [
         foto: "https://p16-flow-sign-va.ciciai.com/ocean-cloud-tos-us/1e14e42efb02498893ec0c100e96fab7.png~tplv-6bxrjdptv7-image.png?rk3s=18ea6f23&x-expires=1747936917&x-signature=RdArOnRyvO4AQcuYlwZvrRdRkWg%3D",
         nome: "Dr. Tomás Turbando",
         data: "25/05/2024",
-        foiAgendado: true,
+        foiAgendado: false,
         foiAtendido: false,
     },
     {
@@ -44,7 +44,7 @@ const consultas = [
         nome: "Dra. Kelly Nguissa",
         data: "26/05/2024",
         foiAgendado: false,
-        foiAtendido: true,
+        foiAtendido: false,
     }
 ];
 
@@ -67,8 +67,8 @@ export default function Explorar() {
                             foto={consulta.foto}
                             nome={consulta.nome}
                             data={consulta.data}
-                            foiAgendado={false}
-                            foiAtendido={false}
+                            foiAgendado={consulta.foiAgendado}
+                            foiAtendido={consulta.foiAtendido}
                         />
                     </VStack>
                 ))}
