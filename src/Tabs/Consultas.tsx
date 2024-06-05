@@ -1,58 +1,105 @@
-import { VStack, Divider, ScrollView } from 'native-base'
+import { VStack, Divider, ScrollView, useToast } from 'native-base'
 import { Botao } from '../componentes/Botao'
 import { CardConsulta } from '../componentes/CardConsulta'
-import { Titulo } from '../componentes/titulo'
+import { Titulo } from '../componentes/Titulo'
+import { useEffect, useState } from 'react'
+import { NavigationProps } from '../@types/navigation'
+import AsyncStorage from '@react-native-async-storage/async-storage'
+import { pegarConsultasPaciente } from '../servicos/PacienteServico'
+import { cancelarConsulta } from '../servicos/ConsultaServico'
+import { useIsFocused } from '@react-navigation/native'
 
-const medicos = [
-    {
-        especialidade: "Cardiologista",
-        foto: "https://p16-flow-sign-va.ciciai.com/ocean-cloud-tos-us/aa7170568d3f47ca9f9cd89d13d6096f.png~tplv-6bxrjdptv7-image.png?rk3s=18ea6f23&x-expires=1747936764&x-signature=ouSCz120O2ttQMn9Vsx9FqVZo7k%3D",
-        nome: "Dr. Jalim Rabei",
-        data: "22/05/2024",
-        foiAgendado: false,
-        foiAtendido: true,
-    },
-    {
-        especialidade: "Dermatologista",
-        foto: "https://p16-flow-sign-va.ciciai.com/ocean-cloud-tos-us/4913df5a0ae54c8a95fdc1130282dd89.png~tplv-6bxrjdptv7-image.png?rk3s=18ea6f23&x-expires=1747936840&x-signature=%2BZ71iZD60wnnz0VObLZDnroXF5E%3D",
-        nome: "Dra. Paula Tejando",
-        data: "23/05/2024",
-        foiAgendado: false,
-        foiAtendido: true,
+interface Especialista {
+  nome: string;
+  imagem: string;
+  especialidade: string;
+  id: string;
+}
+
+interface Consulta {
+  id: string;
+  data: string;
+  especialista: Especialista;
+}
+
+export default function Consultas({ navigation }: NavigationProps<'Consultas'>) {
+  const [consultasProximas, setConsultasProximas] = useState<Consulta[]>([]);
+  const [consultasPassadas, setConsultasPassadas] = useState<Consulta[]>([]);
+  const [recarregar, setRecarregar] = useState(false);
+  const toast = useToast();
+
+  const isFocused = useIsFocused()
+
+
+  useEffect(() => {
+    async function pegarConsultas() {
+      const pacienteId = await AsyncStorage.getItem('pacienteId');
+      if (!pacienteId) return;
+
+      const todasConsultas: Consulta[] = await pegarConsultasPaciente(pacienteId);
+      const agora = new Date();
+
+      const proximas = todasConsultas.filter((consulta) => new Date(consulta.data) > agora);
+      const passadas = todasConsultas.filter((consulta) => new Date(consulta.data) <= agora);
+
+      setConsultasProximas(proximas);
+      setConsultasPassadas(passadas);
     }
-];
+    pegarConsultas()
+  }, [isFocused,recarregar])
 
-export default function Consultas() {
-    return (
-        <ScrollView p="5">
-            <Titulo color="blue.500">Minhas consultas</Titulo>
-            <Botao mt={5} mb={5}>Agendar nova consulta</Botao>
 
-            <Titulo color="blue.500" fontSize="lg" alignSelf="flex-start" mb={2}>Próximas consultas</Titulo>
-            <CardConsulta
-                nome="Dra. Kelly Nguissa"
-                especialidade="Pediatra"
-                foto="https://p16-flow-sign-va.ciciai.com/ocean-cloud-tos-us/d5f25d246585490391f5aef5ce0bdd47.png~tplv-6bxrjdptv7-image.png?rk3s=18ea6f23&x-expires=1747936967&x-signature=fDQ6G78Lfy08x1HEGx%2BUxa%2BgY7s%3D"
-                data="20/06/2024"
-                foiAgendado
-                foiAtendido={false}
-            />
+  async function cancelar(consultaId: string) {
+    const resultado = await cancelarConsulta(consultaId)
+    if (resultado) {
+      toast.show({
+        title: 'Consulta cancelada com sucesso!',
+        backgroundColor: 'green.500'
+      })
+      navigation.navigate('Consultas')
+      setRecarregar(!recarregar)
+    }
+    else {
+      toast.show({
+        title: 'Erro ao cancelar consulta!',
+        backgroundColor: 'red.500'
+      })
+    }
+  }
 
-            <Divider mt={5} />
+  
 
-            <Titulo color="blue.500" fontSize="lg" alignSelf="flex-start" mb={2}>Consultas passadas</Titulo>
-            {medicos.map((consulta, index) => (
-                    <VStack key={index} mb={2}>
-                        <CardConsulta
-                            especialidade={consulta.especialidade}
-                            foto={consulta.foto}
-                            nome={consulta.nome}
-                            data={consulta.data}
-                            foiAgendado={consulta.foiAgendado}
-                            foiAtendido={consulta.foiAtendido}
-                        />
-                    </VStack>
-                ))}
-        </ScrollView>
-    )
+  return (
+    <ScrollView p="5">
+      <Titulo color="blue.500">Minhas consultas</Titulo>
+      <Botao mt={5} mb={5}>Agendar nova consulta</Botao>
+
+      <Titulo color="blue.500" fontSize="lg" alignSelf="flex-start" mb={2}>Próximas consultas</Titulo>
+      {consultasProximas.map((consulta) =>
+        <CardConsulta
+          key={consulta.id}
+          nome={consulta?.especialista?.nome}
+          especialidade={consulta?.especialista?.especialidade}
+          foto={consulta?.especialista?.imagem}
+          data={consulta?.data}
+          onPress={() => cancelar(consulta.id)}
+          foiAgendado
+        />
+      )}
+
+      <Divider mt={5} />
+
+      <Titulo color="blue.500" fontSize="lg" alignSelf="flex-start" mb={2}>Consultas passadas</Titulo>
+      {consultasPassadas.map((consulta) =>
+        <CardConsulta
+          key={consulta.id}
+          nome={consulta?.especialista?.nome}
+          especialidade={consulta?.especialista?.especialidade}
+          foto={consulta?.especialista?.imagem}
+          data={consulta?.data}
+          foiAtendido
+        />
+      )}
+    </ScrollView>
+  )
 }

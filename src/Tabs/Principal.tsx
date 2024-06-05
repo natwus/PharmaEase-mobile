@@ -1,35 +1,18 @@
-import { VStack, Box, ScrollView, Image, Text, Divider } from "native-base";
-import { useEffect, useState } from "react";
-import { EntradaTexto } from "../componentes/EntradaTexto";
-import { Botao } from "../componentes/Botao";
+import { VStack, Image, Box, ScrollView, Text, Divider } from "native-base";
 import Logo from '../assets/Logo.png';
-import { Titulo } from "../componentes/titulo";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import { Botao } from "../componentes/Botao";
+import { EntradaTexto } from "../componentes/EntradaTexto";
+import { Titulo } from "../componentes/Titulo";
 import { depoimentos } from "../utils/mock";
-import { pegarDadosPaciente } from "../servicos/PacienteServico";
-import { Paciente } from "../interfaces/Paciente";
 
-export default function Principal() {
-  const [dadosPaciente, setDadosPaciente] = useState({} as Paciente)
 
-  useEffect(() => {
-    async function dadosPaciente() {
-      const pacienteId = await AsyncStorage.getItem('pacienteid')
-      if (!pacienteId) return null
+export default function Principal(){
 
-      const resultado = await pegarDadosPaciente(pacienteId)
-      if (resultado) {
-        setDadosPaciente(resultado)
-        console.log(resultado)
-      }
-    }
-    dadosPaciente()
-  })
   return (
     <ScrollView flex={1} bgColor="white">
       <VStack flex={1} alignItems="flex-start" justifyContent="flex-start" p={5}>
         <Image source={Logo} alt="Logo" mt={10} />
-        <Titulo color="blue.500">Boas-vindas, {dadosPaciente.nome}!</Titulo>
+        <Titulo color="blue.500">Boas-vindas!</Titulo>
 
         <Box w="100%" borderRadius="lg" p={3} mt={10} shadow="1" borderRightRadius="md">
           <EntradaTexto
@@ -44,7 +27,7 @@ export default function Principal() {
         </Box>
 
         <Titulo color="blue.800" alignSelf="center">Depoimentos</Titulo>
-        <VStack space={3} divider={<Divider />} w="100%">
+        <VStack shadow={2} space={3} divider={<Divider />} w="100%">
           {
             depoimentos.map(depoimento => (
               <Box key={depoimento.id} w="100%" borderRadius="lg" p={3}>
@@ -58,5 +41,5 @@ export default function Principal() {
         </VStack>
       </VStack>
     </ScrollView>
-  )
+  );
 }
