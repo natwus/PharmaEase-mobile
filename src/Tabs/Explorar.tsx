@@ -47,14 +47,15 @@ export default function Explorar({ navigation }) {
           </Botao>
         </Box>
 
-        <Titulo color="blue.500" alignSelf="center">Resultado da Busca</Titulo>
-        {resultadoBusca.length < 1 && (
-          <Titulo alignSelf={"center"}>
-            Médico não encontrado
-          </Titulo>
-        )}
+
         {resultadoBusca?.map((especialista: Especialista, index) => (
           <VStack flex={1} w="100%" alignItems="flex-start" bgColor="white" key={index}>
+            <Titulo color="blue.500" alignSelf="center">Resultado da Busca</Titulo>
+            {resultadoBusca.length < 1 && (
+              <Titulo alignSelf={"center"}>
+                Médico não encontrado
+              </Titulo>
+            )}
             <CardConsulta
               especialidade={especialista.especialidade}
               foto={especialista.imagem}
@@ -63,6 +64,7 @@ export default function Explorar({ navigation }) {
             />
           </VStack>
         ))}
+        <Botao onPress={() => navigation.navigate('Principal')} bgColor="gray.400">Voltar</Botao>
       </VStack>
     </ScrollView>
   )

@@ -4,8 +4,10 @@ import { Botao } from "./componentes/Botao";
 import { agendarConsulta } from "./servicos/ConsultaServico";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { converterStringParaData } from './utils/conversoes';
+import { EntradaTexto } from "./componentes/EntradaTexto";
 
 export default function Agendamento({ route, navigation }: any) {
+
     const [data, setData] = useState('');
     const toast = useToast();
 
@@ -31,8 +33,9 @@ export default function Agendamento({ route, navigation }: any) {
 
     return (
         <VStack flex={1} alignItems="center" justifyContent="center" padding={5}>
-            <Input placeholder="Digite a data" onChangeText={setData} />
+            <EntradaTexto placeholder="Digite a data" onChangeText={setData} />
             <Botao onPress={agendar}>Agendar</Botao>
+            <Botao onPress={()=>navigation.goBack()} bgColor="gray.400">Voltar</Botao>
         </VStack>
     )
 }
