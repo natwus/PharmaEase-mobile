@@ -5,11 +5,19 @@ import { EntradaTexto } from "../componentes/EntradaTexto";
 import { Titulo } from "../componentes/Titulo";
 import { depoimentos } from "../utils/mock";
 import { useState } from "react";
-import { CardConsulta } from "../componentes/CardConsulta";
 import { buscarEspecialistaPorEstado } from "../servicos/EspecialistaServico";
+import { CardConsulta } from "../componentes/CardConsulta";
+
+interface Especialista {
+  nome: string,
+  imagem: string,
+  especialidade: string,
+  id: string,
+}
 
 
-export default function Principal({ navigation }){
+export default function Principal({navigation}){
+
   const [estado, setEstado] = useState('');
   const [especialidade, setEspecialidade] = useState('');
   const [resultadoBusca, setResultadoBuscar] = useState([]);
@@ -44,10 +52,8 @@ export default function Principal({ navigation }){
             Buscar
           </Botao>
         </Box>
-        
         {resultadoBusca?.map((especialista: Especialista, index) => (
           <VStack flex={1} w="100%" alignItems="flex-start" bgColor="white" key={index}>
-            <Titulo color="blue.500" alignSelf="center">Resultado da Busca</Titulo>
             <CardConsulta
               especialidade={especialista.especialidade}
               foto={especialista.imagem}
@@ -58,7 +64,7 @@ export default function Principal({ navigation }){
         ))}
 
         <Titulo color="blue.800" alignSelf="center">Depoimentos</Titulo>
-        <VStack shadow={2} space={3} divider={<Divider />} w="100%">
+        <VStack space={3} divider={<Divider />} w="100%">
           {
             depoimentos.map(depoimento => (
               <Box key={depoimento.id} w="100%" borderRadius="lg" p={3}>

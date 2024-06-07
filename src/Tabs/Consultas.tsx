@@ -97,8 +97,8 @@ export default function Consultas({ navigation }: NavigationProps<'Consultas'>) 
           especialidade={consulta?.especialista?.especialidade}
           foto={consulta?.especialista?.imagem}
           data={consulta?.data}
-          foiAtendido
           onPress={() => navigation.navigate('Agendamento', { especialistaId: consulta.especialista.id })}
+          foiAtendido
         />
       )}
     </ScrollView>
