@@ -1,7 +1,7 @@
 import { VStack, Divider, ScrollView, useToast } from 'native-base'
 import { Botao } from '../componentes/Botao'
 import { CardConsulta } from '../componentes/CardConsulta'
-import { Titulo } from '../componentes/Titulo'
+import { Titulo } from '../componentes/titulo'
 import { useEffect, useState } from 'react'
 import { NavigationProps } from '../@types/navigation'
 import AsyncStorage from '@react-native-async-storage/async-storage'

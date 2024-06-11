@@ -1,9 +1,9 @@
 import { Image, Text, Box, Checkbox, ScrollView, useToast } from 'native-base'
 import { useState } from 'react';
-import Logo from './assets/Logo.png'
+import Logo from './assets/Logo4.png'
 import { Botao } from './componentes/Botao';
 import { EntradaTexto } from './componentes/EntradaTexto';
-import { Titulo } from './componentes/Titulo';
+import { Titulo } from './componentes/titulo';
 import { secoes } from './utils/CadastroEntradaTexto';
 import { cadastrarPaciente } from './servicos/PacienteServico';
 
@@ -112,7 +112,7 @@ export default function Cadastro({ navigation }: any) {
         }
       </Box>
       <Box>
-        {numSecao == 2 && <Text color="blue.800" fontWeight="bold" fontSize="md" mt="2" mb={2}>
+        {numSecao == 2 && <Text color="red.700" fontWeight="bold" fontSize="md" mt="2" mb={2}>
           Selecione o plano:
         </Text>}
         {
@@ -137,7 +137,7 @@ export default function Cadastro({ navigation }: any) {
         }
       </Box>
       {numSecao > 0 && <Botao onPress={() => voltarSecao()} bgColor="gray.400">Voltar</Botao>}
-      <Botao onPress={() => avancarSecao()} mt={4} mb={20}>
+      <Botao onPress={() => avancarSecao()} mt={4} mb={20} backgroundColor="red.600">
         {numSecao == 2 ? 'Finalizar' : 'Avancar'}
       </Botao>
     </ScrollView>

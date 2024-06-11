@@ -4,7 +4,7 @@ import { Botao } from "./componentes/Botao";
 import { agendarConsulta } from "./servicos/ConsultaServico";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { converterStringParaData } from './utils/conversoes';
-import { Titulo } from "./componentes/Titulo";
+import { Titulo } from "./componentes/titulo";
 
 export default function Agendamento({ route, navigation }: any) {
     const [data, setData] = useState('');
