@@ -1,14 +1,19 @@
+import React, { useState } from "react";
 import { VStack, Image, Box, ScrollView, Text, Divider } from "native-base";
 import Logo from '../assets/Logo.png';
 import { Botao } from "../componentes/Botao";
 import { EntradaTexto } from "../componentes/EntradaTexto";
 import { Titulo } from "../componentes/Titulo";
 import { depoimentos } from "../utils/mock";
-import { useState } from "react";
 import { buscarEspecialistaPorEstado } from "../servicos/EspecialistaServico";
 import { CardConsulta } from "../componentes/CardConsulta";
-import Dipirona from '../assets/dipirona.png'
-
+import Dipirona from '../assets/dipirona.png';
+import Ibuprofeno from '../assets/ibuprofeno.png';
+import Dorflex from '../assets/dorflex.png'
+import Amoxilina from '../assets/Amoxilina.png'
+import Ciprofloxacino from '../assets/ciprofloxacino.png'
+import Cefalexina from '../assets/Cefalexina.png'
+import { Remedios } from '../remedios/Remedios';
 
 interface Especialista {
   nome: string,
@@ -16,29 +21,61 @@ interface Especialista {
   especialidade: string,
   id: string,
 }
-const array = [
+
+const Analgezico = [
   {
     id: 1,
     nome: 'Dipirona',
-    description:'Dipirona 500Mg 30 Comprimidos - Prati Donaduzzi - Genérico',
-    imagem: Dipirona ,
+    description: 'Dipirona 500Mg 30 Comprimidos - Prati Donaduzzi - Genérico',
+    imagem: Dipirona,
+  },
+  {
+    id: 2,
+    nome: 'Ibuprofeno',
+    description: 'Ibupril 400mg 20 Cápsulas Moles',
+    imagem: Ibuprofeno,
+  },
+  {
+    id: 3,
+    nome: 'Dorflex',
+    description: 'Dorflex Analgésico - 36 Comprimidos',
+    imagem: Dorflex,
   }
+  
+]
+const Antibióticos = [
+  {
+    id: 1,
+    nome: 'Amoxicilina (Amoxil)',
+    description: 'AMOXIL GSK CAIXA 30 CÁPSULAS',
+    imagem: Amoxilina,
+  },
+  {
+    id: 2,
+    nome: 'Ciprofloxacino (Cipro)',
+    description: 'Cloridrato de Ciprofloxacino 500mg Pharlab com 14 comprimidos Revestidos',
+    imagem: Ciprofloxacino,
+  },
+  {
+    id: 3,
+    nome: 'Cefalexina (Keflex)',
+    description: 'Keflex Cefalexina 500mg 8 drágeas',
+    imagem: Cefalexina,
+  }
+  
+];
 
-  ]
-
-
-export default function Principal({navigation}){
-
+export default function Principal({ navigation }) {
   const [estado, setEstado] = useState('');
   const [especialidade, setEspecialidade] = useState('');
   const [resultadoBusca, setResultadoBuscar] = useState([]);
 
   async function buscar() {
-    if (!estado || !especialidade) return null
-    const resultado = await buscarEspecialistaPorEstado(estado, especialidade)
+    if (!estado || !especialidade) return null;
+    const resultado = await buscarEspecialistaPorEstado(estado, especialidade);
     if (resultado) {
-      setResultadoBuscar(resultado)
-      console.log(resultado)
+      setResultadoBuscar(resultado);
+      console.log(resultado);
     }
   }
 
@@ -49,7 +86,7 @@ export default function Principal({navigation}){
         <Titulo color="blue.500">Boas-vindas!</Titulo>
 
         <Box w="100%" borderRadius="lg" p={3} mt={10} shadow="1" borderRightRadius="md">
-        <EntradaTexto
+          <EntradaTexto
             placeholder="Digite a especialidade"
             value={especialidade}
             onChangeText={setEspecialidade}
@@ -74,30 +111,37 @@ export default function Principal({navigation}){
           </VStack>
         ))}
 
-        {array?.map((dipirona, index) => (
-          <VStack flex={1} w="100%" alignItems="flex-start" bgColor="white" key={index}>
-            <Remedios
-              nome={dipirona.nome}
-              foto={dipirona.imagem}
-         
-              onPress={() => navigation.navigate('Agendamento', {dipironaId: dipirona.id })}
-            />
-          </VStack>
-        ))}
-
-        <Titulo color="blue.800" alignSelf="center">Depoimentos</Titulo>
-        <VStack space={3} divider={<Divider />} w="100%">
-          {
-            depoimentos.map(depoimento => (
-              <Box key={depoimento.id} w="100%" borderRadius="lg" p={3}>
-                <Text color="gray.300" fontSize="md" textAlign="justify">
-                  {depoimento.text}
-                </Text>
-                <Text color="gray.500" fontSize="lg" fontWeight="bold" alignSelf="center" mt="2">{depoimento.titulo}</Text>
+        <Titulo color="blue.800" alignSelf="center">Remédios</Titulo>
+        <Box w="100%" borderRadius="lg" p={3} shadow={1} mt={5}>
+          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+            {Analgezico?.map((remedio, index) => (
+              <Box key={index} borderRadius="lg" p={3} shadow="1" mr={4}>
+                <Remedios
+                  nome={remedio.nome}
+                  foto={remedio.imagem}
+                  description={remedio.description}
+                  // onPress={() => navigation.navigate('Agendamento', { remedioId: remedio.id })}
+                />
               </Box>
-            ))
-          }
-        </VStack>
+            ))}
+          </ScrollView>
+        </Box>
+       
+        <Box w="100%" borderRadius="lg" p={3} shadow={1} mt={5}>
+          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+            {Antibióticos?.map((remedio, index) => (
+              <Box key={index} borderRadius="lg" p={3} shadow="1" mr={4}>
+                <Remedios
+                  nome={remedio.nome}
+                  foto={remedio.imagem}
+                  description={remedio.description}
+                  // onPress={() => navigation.navigate('Agendamento', { remedioId: remedio.id })}
+                />
+              </Box>
+            ))}
+          </ScrollView>
+        </Box>
+
       </VStack>
     </ScrollView>
   );
