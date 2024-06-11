@@ -7,6 +7,8 @@ import { depoimentos } from "../utils/mock";
 import { useState } from "react";
 import { buscarEspecialistaPorEstado } from "../servicos/EspecialistaServico";
 import { CardConsulta } from "../componentes/CardConsulta";
+import Dipirona from '../assets/dipirona.png'
+
 
 interface Especialista {
   nome: string,
@@ -14,6 +16,15 @@ interface Especialista {
   especialidade: string,
   id: string,
 }
+const array = [
+  {
+    id: 1,
+    nome: 'Dipirona',
+    description:'Dipirona 500Mg 30 Comprimidos - Prati Donaduzzi - Genérico',
+    imagem: Dipirona ,
+  }
+
+  ]
 
 
 export default function Principal({navigation}){
@@ -59,6 +70,17 @@ export default function Principal({navigation}){
               foto={especialista.imagem}
               nome={especialista.nome}
               onPress={() => navigation.navigate('Agendamento', { especialistaId: especialista.id })}
+            />
+          </VStack>
+        ))}
+
+        {array?.map((dipirona, index) => (
+          <VStack flex={1} w="100%" alignItems="flex-start" bgColor="white" key={index}>
+            <Remedios
+              nome={dipirona.nome}
+              foto={dipirona.imagem}
+         
+              onPress={() => navigation.navigate('Agendamento', {dipironaId: dipirona.id })}
             />
           </VStack>
         ))}
