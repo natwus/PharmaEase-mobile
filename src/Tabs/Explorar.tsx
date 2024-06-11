@@ -6,6 +6,7 @@ import { Titulo } from "../componentes/Titulo";
 import { buscarEspecialistaPorEstado } from "../servicos/EspecialistaServico";
 import { useState } from "react";
 
+
 interface Especialista {
   nome: string,
   imagem: string,
@@ -27,6 +28,10 @@ export default function Explorar({ navigation }) {
     }
   }
 
+  function voltarSecao() {
+    navigation.replace('Login')
+   }
+
   return (
     <ScrollView flex={1} bgColor="white">
       <VStack flex={1} alignItems="flex-start" justifyContent="flex-start" p={5}>
@@ -44,15 +49,9 @@ export default function Explorar({ navigation }) {
           <Botao mt={3} mb={3} onPress={buscar}>
             Buscar
           </Botao>
-          <Botao mt={1} onPress={() => navigation.goBack()}>Voltar</Botao>
         </Box>
 
-        <Titulo color="blue.500" alignSelf="center">Resultado da Busca</Titulo>
-        {resultadoBusca.length < 1 && (
-          <Titulo alignSelf={"center"}>
-            Médico não encontrado
-          </Titulo>
-        )}
+        <Titulo color="red.500" alignSelf="center">Resultado da Busca</Titulo>
         {resultadoBusca?.map((especialista: Especialista, index) => (
           <VStack flex={1} w="100%" alignItems="flex-start" bgColor="white" key={index}>
             <CardConsulta
@@ -60,10 +59,13 @@ export default function Explorar({ navigation }) {
               foto={especialista.imagem}
               nome={especialista.nome}
               onPress={() => navigation.navigate('Agendamento', { especialistaId: especialista.id })}
+              
             />
+             
           </VStack>
         ))}
       </VStack>
+      <Botao onPress={() => voltarSecao()} bgColor="gray.400">Voltar</Botao>
     </ScrollView>
   )
 }

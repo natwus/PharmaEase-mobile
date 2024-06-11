@@ -17,6 +17,7 @@ export default function Perfil({ navigation }) {
       const resultado = await pegarDadosPaciente(pacienteId);
       if (resultado) {
         setDadosPaciente(resultado);
+        console.log(resultado);
       }
     }
     dadosPaciente();
@@ -31,19 +32,20 @@ export default function Perfil({ navigation }) {
   return (
     <ScrollView flex={1}>
       <VStack flex={1} alignItems="center" p={5}>
-        <Titulo color="blue.500">Meu Perfil</Titulo>
+        <Titulo color="red.500">Meu Perfil</Titulo>
 
         <Avatar size="xl" source={{ uri: dadosPaciente?.imagem }} mt={5} />
 
-        <Titulo color="blue.500">Informações pessoais</Titulo>
+        <Titulo color="red.500">Informações pessoais</Titulo>
         <Titulo fontSize="lg" mb={1}>{dadosPaciente.nome}</Titulo>
         <Text>Email: {dadosPaciente?.email}</Text>
         <Text>Estado: {dadosPaciente?.endereco?.estado}</Text>
         <Text>Telefone: {dadosPaciente?.telefone}</Text>
 
+
         <Divider mt={5} />
 
-        <Titulo color="blue.500" mb={1}>Planos de Saúde</Titulo>
+        <Titulo color="red.500" mb={1}>Planos de Saúde</Titulo>
         {
           dadosPaciente?.planosSaude?.map((plano, index) => (
             <Text key={index}>{plano}</Text>
