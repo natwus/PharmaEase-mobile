@@ -1,9 +1,9 @@
 import { VStack, Image, Text, Box, Link, useToast } from 'native-base'
 import { TouchableOpacity } from 'react-native';
-import Logo from './assets/Logo.png'
+import Logo from './assets/Logo2 (2).png'
 import { Botao } from './componentes/Botao';
 import { EntradaTexto } from './componentes/EntradaTexto';
-import { Titulo } from './componentes/Titulo';
+import { Titulo } from './componentes/titulo';
 import { useEffect, useState } from 'react';
 import { fazerLogin } from './servicos/AutenticacaoServico';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -53,7 +53,7 @@ export default function Login({ navigation }: any) {
 
   return (
     <VStack flex={1} alignItems="center" justifyContent="center" p={5}>
-      <Image source={Logo} alt="Logo Voll" />
+      <Image source={Logo} alt="Logo Voll" mr={8}  mb={10}/>
 
       <Titulo>
         Faça login em sua conta
@@ -73,7 +73,7 @@ export default function Login({ navigation }: any) {
           secureTextEntry
         />
       </Box>
-      <Botao onPress={login}>Entrar</Botao>
+      <Botao onPress={login} backgroundColor="red.600">Entrar</Botao>
 
       <Link href='https://www.google.com.br' mt={2}>
         Esqueceu sua senha?
@@ -82,7 +82,7 @@ export default function Login({ navigation }: any) {
       <Box w="100%" flexDirection="row" justifyContent="center" mt={8}>
         <Text>Ainda não tem cadastro? </Text>
         <TouchableOpacity onPress={() => navigation.navigate('Cadastro')}>
-          <Text color="blue.500">
+          <Text color="red.500">
             Faça seu cadastro!
           </Text>
         </TouchableOpacity>

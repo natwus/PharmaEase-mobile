@@ -1,7 +1,7 @@
 import { VStack, Divider, ScrollView, useToast } from 'native-base'
 import { Botao } from '../componentes/Botao'
 import { CardConsulta } from '../componentes/CardConsulta'
-import { Titulo } from '../componentes/Titulo'
+import { Titulo } from '../componentes/titulo'
 import { useEffect, useState } from 'react'
 import { NavigationProps } from '../@types/navigation'
 import AsyncStorage from '@react-native-async-storage/async-storage'
@@ -26,10 +26,8 @@ export default function Consultas({ navigation }: NavigationProps<'Consultas'>) 
   const [consultasProximas, setConsultasProximas] = useState<Consulta[]>([]);
   const [consultasPassadas, setConsultasPassadas] = useState<Consulta[]>([]);
   const [recarregar, setRecarregar] = useState(false);
+  const isFocused = useIsFocused();
   const toast = useToast();
-
-  const isFocused = useIsFocused()
-
 
   useEffect(() => {
     async function pegarConsultas() {
@@ -46,35 +44,31 @@ export default function Consultas({ navigation }: NavigationProps<'Consultas'>) 
       setConsultasPassadas(passadas);
     }
     pegarConsultas()
-  }, [isFocused,recarregar])
+  }, [isFocused, recarregar])
 
-
-  async function cancelar(consultaId: string) {
-    const resultado = await cancelarConsulta(consultaId)
+  async function cancelarConsultas(consultaId: string) {
+    const resultado = await cancelarConsulta(consultaId);
     if (resultado) {
       toast.show({
-        title: 'Consulta cancelada com sucesso!',
-        backgroundColor: 'green.500'
+        title: "Consulta cancelada com sucesso!",
+        description: "Consulta cancelada",
+        backgroundColor: "green.500"
       })
-      navigation.navigate('Consultas')
-      setRecarregar(!recarregar)
-    }
-    else {
+      setRecarregar(!recarregar);
+    } else {
       toast.show({
-        title: 'Erro ao cancelar consulta!',
-        backgroundColor: 'red.500'
+        title: 'Não foi possível cancelar a consulta',
+        description: "Não foi possível cancelar a consulta",
       })
     }
   }
 
-  
-
   return (
     <ScrollView p="5">
-      <Titulo color="blue.500">Minhas consultas</Titulo>
-      <Botao mt={5} mb={5} onPress={() => navigation.navigate('Explorar')}>Agendar nova consulta</Botao>
+      <Titulo color="red.500">Minhas consultas</Titulo>
+      <Botao onPress={() => navigation.navigate('Explorar')} mt={5} mb={5}>Agendar nova consulta</Botao>
 
-      <Titulo color="blue.500" fontSize="lg" alignSelf="flex-start" mb={2}>Próximas consultas</Titulo>
+      <Titulo color="red.500" fontSize="lg" alignSelf="flex-start" mb={2}>Próximas consultas</Titulo>
       {consultasProximas.map((consulta) =>
         <CardConsulta
           key={consulta.id}
@@ -82,14 +76,14 @@ export default function Consultas({ navigation }: NavigationProps<'Consultas'>) 
           especialidade={consulta?.especialista?.especialidade}
           foto={consulta?.especialista?.imagem}
           data={consulta?.data}
-          onPress={() => cancelar(consulta.id)}
           foiAgendado
+          onPress={() => cancelarConsultas(consulta.id)}
         />
       )}
 
       <Divider mt={5} />
 
-      <Titulo color="blue.500" fontSize="lg" alignSelf="flex-start" mb={2}>Consultas passadas</Titulo>
+      <Titulo color="red.500" fontSize="lg" alignSelf="flex-start" mb={2}>Consultas passadas</Titulo>
       {consultasPassadas.map((consulta) =>
         <CardConsulta
           key={consulta.id}
@@ -97,8 +91,8 @@ export default function Consultas({ navigation }: NavigationProps<'Consultas'>) 
           especialidade={consulta?.especialista?.especialidade}
           foto={consulta?.especialista?.imagem}
           data={consulta?.data}
-          onPress={() => navigation.navigate('Agendamento', { especialistaId: consulta.especialista.id })}
           foiAtendido
+          onPress={() => navigation.navigate('Agendamento', { especialistaId: consulta?.especialista?.id })}
         />
       )}
     </ScrollView>
