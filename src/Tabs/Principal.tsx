@@ -4,9 +4,10 @@ import { Botao } from "../componentes/Botao";
 import { EntradaTexto } from "../componentes/EntradaTexto";
 import { Titulo } from "../componentes/titulo";
 import { depoimentos } from "../utils/mock";
-import { useState } from "react";
-import { buscarEspecialistaPorEstado } from "../servicos/EspecialistaServico";
 import { CardConsulta } from "../componentes/CardConsulta";
+import { buscarEspecialistaPorEstado } from "../servicos/EspecialistaServico";
+import { useState } from "react";
+
 
 interface Especialista {
   nome: string,
@@ -15,9 +16,7 @@ interface Especialista {
   id: string,
 }
 
-
 export default function Principal({navigation}){
-
   const [estado, setEstado] = useState('');
   const [especialidade, setEspecialidade] = useState('');
   const [resultadoBusca, setResultadoBuscar] = useState([]);
@@ -31,14 +30,15 @@ export default function Principal({navigation}){
     }
   }
 
+  function voltarSecao() {
+    navigation.replace('Login')
+   }
+
   return (
     <ScrollView flex={1} bgColor="white">
       <VStack flex={1} alignItems="flex-start" justifyContent="flex-start" p={5}>
-        <Image source={Logo} alt="Logo" mt={10} />
-        <Titulo color="blue.500">Boas-vindas!</Titulo>
-
-        <Box w="100%" borderRadius="lg" p={3} mt={10} shadow="1" borderRightRadius="md">
-        <EntradaTexto
+        <Box w="100%" borderRadius="lg" p={3} mt={5} shadow="1" borderRightRadius="md">
+          <EntradaTexto
             placeholder="Digite a especialidade"
             value={especialidade}
             onChangeText={setEspecialidade}
@@ -52,6 +52,10 @@ export default function Principal({navigation}){
             Buscar
           </Botao>
         </Box>
+
+
+        <Titulo color="red.800" alignSelf="center">Depoimentos</Titulo>
+        <VStack space={3} divider={<Divider />} w="100%">
         {resultadoBusca?.map((especialista: Especialista, index) => (
           <VStack flex={1} w="100%" alignItems="flex-start" bgColor="white" key={index}>
             <CardConsulta
@@ -59,12 +63,11 @@ export default function Principal({navigation}){
               foto={especialista.imagem}
               nome={especialista.nome}
               onPress={() => navigation.navigate('Agendamento', { especialistaId: especialista.id })}
+              
             />
+             
           </VStack>
         ))}
-
-        <Titulo color="blue.800" alignSelf="center">Depoimentos</Titulo>
-        <VStack space={3} divider={<Divider />} w="100%">
           {
             depoimentos.map(depoimento => (
               <Box key={depoimento.id} w="100%" borderRadius="lg" p={3}>

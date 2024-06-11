@@ -8575,7 +8575,7 @@ react-native-vector-icons@^10.1.0:
     prop-types "^15.7.2"
     yargs "^16.1.1"
 
-react-native-web@~0.18.10:
+react-native-web@^0.18.12:
   version "0.18.12"
   resolved "https://registry.npmjs.org/react-native-web/-/react-native-web-0.18.12.tgz"
   integrity sha512-fboP7yqobJ8InSr4fP+bQ3scOtSQtUoPcR+HWasH8b/fk/RO+mWcJs/8n+lewy9WTZc2D68ha7VwRDviUshEWA==
