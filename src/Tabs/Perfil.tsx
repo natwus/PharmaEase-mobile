@@ -17,7 +17,6 @@ export default function Perfil({ navigation }) {
       const resultado = await pegarDadosPaciente(pacienteId);
       if (resultado) {
         setDadosPaciente(resultado);
-        console.log(resultado);
       }
     }
     dadosPaciente();
