@@ -1,5 +1,5 @@
 import { VStack, Image, Box, ScrollView, Text, Divider } from "native-base";
-import Logo from '../assets/Logo.png';
+import Logo from '../assets/Logo2 (2).png';
 import { Botao } from "../componentes/Botao";
 import { EntradaTexto } from "../componentes/EntradaTexto";
 import { Titulo } from "../componentes/titulo";
@@ -37,6 +37,7 @@ export default function Principal({navigation}){
   return (
     <ScrollView flex={1} bgColor="white">
       <VStack flex={1} alignItems="flex-start" justifyContent="flex-start" p={5}>
+      <Image source={Logo} alt="Logo Voll" mr={8}  mb={10}/>
         <Box w="100%" borderRadius="lg" p={3} mt={5} shadow="1" borderRightRadius="md">
           <EntradaTexto
             placeholder="Digite a especialidade"
