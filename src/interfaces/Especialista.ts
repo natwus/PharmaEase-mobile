@@ -1,6 +1,6 @@
 interface Especialista {
     nome: string,
     imagem: string,
-    especialidade: string,
+    categoria: string,
     id: string;
 }

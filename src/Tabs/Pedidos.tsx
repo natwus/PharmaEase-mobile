@@ -1,6 +1,6 @@
 import { VStack, Divider, ScrollView, useToast } from 'native-base'
 import { Botao } from '../componentes/Botao'
-import { CardConsulta } from '../componentes/CardConsulta'
+import { CardConsulta } from '../componentes/CardRemédio'
 import { Titulo } from '../componentes/titulo'
 import { useEffect, useState } from 'react'
 import { NavigationProps } from '../@types/navigation'
@@ -22,7 +22,7 @@ interface Consulta {
   especialista: Especialista;
 }
 
-export default function Consultas({ navigation }: NavigationProps<'Consultas'>) {
+export default function Pedidos({ navigation }: NavigationProps<'Pedidos'>) {
   const [consultasProximas, setConsultasProximas] = useState<Consulta[]>([]);
   const [consultasPassadas, setConsultasPassadas] = useState<Consulta[]>([]);
   const [recarregar, setRecarregar] = useState(false);
@@ -76,7 +76,7 @@ export default function Consultas({ navigation }: NavigationProps<'Consultas'>) 
           especialidade={consulta?.especialista?.especialidade}
           foto={consulta?.especialista?.imagem}
           data={consulta?.data}
-          foiAgendado
+          foiPedido
           onPress={() => cancelarConsultas(consulta.id)}
         />
       )}
@@ -91,7 +91,7 @@ export default function Consultas({ navigation }: NavigationProps<'Consultas'>) 
           especialidade={consulta?.especialista?.especialidade}
           foto={consulta?.especialista?.imagem}
           data={consulta?.data}
-          foiAtendido
+          foiRecebido
           onPress={() => navigation.navigate('Agendamento', { especialistaId: consulta?.especialista?.id })}
         />
       )}

@@ -2,7 +2,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Ionicons from 'react-native-vector-icons/Ionicons'
 
 import Principal from "./Principal";
-import Consultas from "./Consultas";
+import Pedidos from "./Pedidos";
 import Explorar from "./Explorar";
 import Perfil from "./Perfil";
 
@@ -24,7 +24,7 @@ const tabs = [
   },
   {
     name: 'Pedidos',
-    component: Consultas,
+    component: Pedidos,
     icon: 'calendar'
   },
   {

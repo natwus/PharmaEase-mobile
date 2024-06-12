@@ -6,7 +6,7 @@ export type ListaTelas = {
     Cadastro: undefined;
     Perfil: undefined;
     Explorar: undefined;
-    Consultas: undefined;
+    Pedidos: undefined;
     Principal: undefined;
     Tabs: undefined;
     Agendamento: { especialistaId: string }
