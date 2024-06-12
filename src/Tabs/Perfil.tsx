@@ -50,7 +50,7 @@ export default function Perfil({ navigation }) {
             <Text key={index}>{plano}</Text>
           ))
         }
-        <Botao onPress={deslogar}>
+        <Botao backgroundColor="red.600" onPress={deslogar}>
           Deslogar
         </Botao>
       </VStack>

@@ -28,10 +28,6 @@ export default function Explorar({ navigation }) {
     }
   }
 
-  function voltarSecao() {
-    navigation.replace('Login')
-   }
-
   return (
     <ScrollView flex={1} bgColor="white">
       <VStack flex={1} alignItems="flex-start" justifyContent="flex-start" p={5}>
@@ -59,13 +55,10 @@ export default function Explorar({ navigation }) {
               foto={especialista.imagem}
               nome={especialista.nome}
               onPress={() => navigation.navigate('Agendamento', { especialistaId: especialista.id })}
-              
             />
-             
           </VStack>
         ))}
       </VStack>
-      <Botao onPress={() => voltarSecao()} bgColor="gray.400">Voltar</Botao>
     </ScrollView>
   )
 }

@@ -1,10 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { VStack, Image, Box, ScrollView, Text, Divider } from "native-base";
-import Logo from '../assets/Logo.png';
+import Logo from '../assets/Logo2 (2).png';
 import { Botao } from "../componentes/Botao";
 import { EntradaTexto } from "../componentes/EntradaTexto";
 import { Titulo } from "../componentes/titulo";
-import { depoimentos } from "../utils/mock";
 import { buscarEspecialistaPorEstado } from "../servicos/EspecialistaServico";
 import { CardConsulta } from "../componentes/CardConsulta";
 import Dipirona from '../assets/dipirona.png';
@@ -14,6 +13,9 @@ import Amoxilina from '../assets/Amoxilina.png'
 import Ciprofloxacino from '../assets/ciprofloxacino.png'
 import Cefalexina from '../assets/Cefalexina.png'
 import { Remedios } from '../remedios/Remedios';
+import { pegarDadosPaciente } from "../servicos/PacienteServico";
+import { Paciente } from '../interfaces/Paciente';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 interface Especialista {
   nome: string,
@@ -79,11 +81,26 @@ export default function Principal({ navigation }) {
     }
   }
 
+  const [dadosPaciente, setDadosPaciente] = useState({} as Paciente);
+
+  useEffect(() => {
+    async function dadosPaciente() {
+      const pacienteId = await AsyncStorage.getItem('pacienteId');
+      if (!pacienteId) return null;
+
+      const resultado = await pegarDadosPaciente(pacienteId);
+      if (resultado) {
+        setDadosPaciente(resultado);
+      }
+    }
+    dadosPaciente();
+  })
+
   return (
     <ScrollView flex={1} bgColor="white">
       <VStack flex={1} alignItems="flex-start" justifyContent="flex-start" p={5}>
         <Image source={Logo} alt="Logo" mt={10} />
-        <Titulo color="blue.500">Boas-vindas!</Titulo>
+        <Titulo color="red.500">Boas-vindas, {dadosPaciente.nome}!</Titulo>
 
         <Box w="100%" borderRadius="lg" p={3} mt={10} shadow="1" borderRightRadius="md">
           <EntradaTexto
@@ -96,7 +113,7 @@ export default function Principal({ navigation }) {
             value={estado}
             onChangeText={setEstado}
           />
-          <Botao mt={3} mb={3} onPress={buscar}>
+          <Botao mt={3} mb={3} onPress={buscar} backgroundColor="red.600">
             Buscar
           </Botao>
         </Box>
@@ -111,11 +128,11 @@ export default function Principal({ navigation }) {
           </VStack>
         ))}
 
-        <Titulo color="blue.800" alignSelf="center">Remédios</Titulo>
-        <Box w="100%" borderRadius="lg" p={3} shadow={1} mt={5}>
+        <Titulo color="blue.800" alignSelf="center">Em destaque</Titulo>
+        <Box w="100%" borderRadius="lg" p={5} shadow={1} mt={5}>
           <ScrollView horizontal showsHorizontalScrollIndicator={false}>
             {Analgezico?.map((remedio, index) => (
-              <Box key={index} borderRadius="lg" p={3} shadow="1" mr={4}>
+              <Box key={index} borderRadius="lg" p={3} shadow={1} bgColor={'green.100'} mr={4}>
                 <Remedios
                   nome={remedio.nome}
                   foto={remedio.imagem}
@@ -127,10 +144,10 @@ export default function Principal({ navigation }) {
           </ScrollView>
         </Box>
        
-        <Box w="100%" borderRadius="lg" p={3} shadow={1} mt={5}>
+        <Box w="100%" borderRadius="lg" p={5} shadow={1} mt={5}>
           <ScrollView horizontal showsHorizontalScrollIndicator={false}>
             {Antibióticos?.map((remedio, index) => (
-              <Box key={index} borderRadius="lg" p={3} shadow="1" mr={4}>
+              <Box key={index} borderRadius="lg" p={3} shadow="1" bgColor={'green.100'} mr={4}>
                 <Remedios
                   nome={remedio.nome}
                   foto={remedio.imagem}

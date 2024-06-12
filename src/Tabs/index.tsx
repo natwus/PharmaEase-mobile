@@ -23,7 +23,7 @@ const tabs = [
     icon: 'home'
   },
   {
-    name: 'Consultas',
+    name: 'Pedidos',
     component: Consultas,
     icon: 'calendar'
   },

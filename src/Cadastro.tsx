@@ -136,9 +136,9 @@ export default function Cadastro({ navigation }: any) {
           })
         }
       </Box>
-      {numSecao > 0 && <Botao onPress={() => voltarSecao()} bgColor="gray.400">Voltar</Botao>}
+      {numSecao == 0 && <Botao onPress={() => voltarSecao()} bgColor="gray.400">Voltar</Botao>}
       <Botao onPress={() => avancarSecao()} mt={4} mb={20} backgroundColor="red.600">
-        {numSecao == 2 ? 'Finalizar' : 'Avancar'}
+        {numSecao == 2 ? 'Finalizar' : 'Avançar'}
       </Botao>
     </ScrollView>
   );
