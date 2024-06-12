@@ -40,9 +40,9 @@ export default function Perfil({ navigation }) {
         <Titulo color="red.500" mb={1}>Suas Informações</Titulo>
         
         <Titulo fontSize="lg" mb={1}>{dadosPaciente.nome}</Titulo>
-        <Text fontSize="md" borderColor="#1C1C1C" borderWidth="1" borderRadius="20" p="2" m="2">Email:            {dadosPaciente?.email}</Text>
-        <Text fontSize="md" borderColor="#1C1C1C" borderWidth="1" borderRadius="20" p="2" m="2">Estado:                           {dadosPaciente?.endereco?.estado}</Text>
-        <Text fontSize="md" borderColor="#1C1C1C" borderWidth="1" borderRadius="20" p="2" m="2">Telefone:                {dadosPaciente?.telefone}</Text>
+        <Text fontSize="md" borderColor="#1C1C1C" borderWidth="1" borderRadius="20" p="4" m="1">Estado: {dadosPaciente?.endereco?.estado}</Text>
+        <Text fontSize="md" borderColor="#1C1C1C" borderWidth="1" borderRadius="20" p="4" m="1">Telefone: {dadosPaciente?.telefone}</Text>
+        <Text fontSize="md" borderColor="#1C1C1C" borderWidth="1" borderRadius="20" p="4" m="1">Email: {dadosPaciente?.email}</Text>
 
         <Titulo color="red.500" mb={1}>Planos de Saúde</Titulo>
         {
