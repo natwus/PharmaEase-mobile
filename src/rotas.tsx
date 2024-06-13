@@ -8,6 +8,7 @@ import Cadastro from "./Cadastro";
 import Login from "./Login";
 import Tabs from "./Tabs";
 import Agendamento from "./Agendamento";
+import Bula from "./Bula";
 
 export default function Rotas() {
   return (
@@ -24,6 +25,9 @@ export default function Rotas() {
         />
         <Tab.Screen
           name="Agendamento" component={Agendamento} options={{ headerShown: false }}
+        />
+        <Tab.Screen
+          name="Bula" component={Bula} options={{ headerShown: false }}
         />
       </Tab.Navigator>
     </NavigationContainer>
