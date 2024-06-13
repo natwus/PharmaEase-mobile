@@ -25,7 +25,7 @@ export default function Bula({ route, navigation }: any) {
   return (
     <ScrollView>
       <VStack flex={1} alignItems="center" justifyContent="center" padding={5} space={4}>
-        <Image source={remedio.imagem} alt={remedio.nome} size="350px" />
+        <Image source={remedio.imagem} alt={remedio.nome} size="400px" />
        
         <Titulo color={'black'}>{remedio.nome}</Titulo>
         {renderIfNotEmpty(remedio.description, Text)}

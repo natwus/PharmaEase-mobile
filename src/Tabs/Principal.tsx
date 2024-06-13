@@ -6,9 +6,12 @@ import { Remedios } from '../remedios/Remedios';
 import { pegarDadosPaciente } from "../servicos/PacienteServico";
 import { Paciente } from '../interfaces/Paciente';
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { Antibioticos, Analgesicos, AntiInflamatorios } from "../utils/mock";
+import { AntiInflamatorios } from "../utils/antiinflamatorio";
+import { Analgesicos } from "../utils/analgesicos";
+import { Antibioticos } from "../utils/antibioticos";
 import MapView, { Marker } from "react-native-maps";
 import { requestForegroundPermissionsAsync, getCurrentPositionAsync, LocationObject, watchPositionAsync, LocationAccuracy } from "expo-location";
+
 
 export default function Principal({ navigation }) {
   const [dadosPaciente, setDadosPaciente] = useState({} as Paciente);
