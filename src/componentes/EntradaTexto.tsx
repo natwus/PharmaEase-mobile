@@ -20,6 +20,7 @@ export function EntradaTexto ({
       {label && <FormControl.Label>{label}</FormControl.Label>}
       <Input
         placeholder={placeholder}
+        focusOutlineColor='red.500'
         size="lg"
         w="100%"
         borderRadius="lg"

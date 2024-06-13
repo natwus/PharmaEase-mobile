@@ -1,4 +1,4 @@
-import { Text, Avatar, VStack } from 'native-base'
+import { Text, Image, VStack } from 'native-base'
 import { Botao } from './Botao'
 
 interface CardProps {
@@ -23,7 +23,7 @@ export function CardConsulta({
   return (
     <VStack w="100%" bg={foiRecebido ? 'green.100' : 'white'} p="5" borderRadius="lg" shadow="2" mb={5}>
       <VStack flexDir="row">
-        <Avatar size="80px" source={{ uri: foto }} />
+        <Image size="80px" source={{ uri: foto }} />
         <VStack pl="4">
           <Text fontSize="md" bold>{nome}</Text>
           <Text>{especialidade}</Text>

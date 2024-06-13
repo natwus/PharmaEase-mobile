@@ -4,6 +4,7 @@ import Principal from "./Principal";
 import Pedidos from "./Pedidos";
 import Explorar from "./Explorar";
 import Perfil from "./Perfil";
+import Contato from "./Contato";
 import { TEMAS } from "../estilos/temas";
 
 const Tab = createBottomTabNavigator()
@@ -12,7 +13,7 @@ const screenOptions = {
   tabBarStyle: {
     backgroundColor: "#DF0101"
   },
-  tabBarActiveTintColor: "#FFB7B7",
+  tabBarActiveTintColor: "green.100",
   tabBarInactiveTintColor: "#FFF"
 }
 
@@ -31,6 +32,11 @@ const tabs = [
     name: 'Explorar',
     component: Explorar,
     icon: 'search'
+  },
+  {
+    name: 'Contato',
+    component: Contato,
+    icon: 'call'
   },
   {
     name: 'Perfil',

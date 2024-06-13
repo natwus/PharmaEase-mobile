@@ -34,7 +34,6 @@ export default function Principal({ navigation }) {
 
   async function permissaoLocalizacao() {
     const { granted } = await requestForegroundPermissionsAsync();
-
     if (granted) {
       const posicaoAtual = await getCurrentPositionAsync();
       setLocalizacao(posicaoAtual);
@@ -161,6 +160,7 @@ export default function Principal({ navigation }) {
                       description={remedio.description}
                       onPress={() => navigation.navigate('Bula',{remedio:remedio})} // Definir o remédio selecionado
                     />
+                  
                   </Box>
                 ))}
               </ScrollView>
