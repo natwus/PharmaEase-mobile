@@ -42,7 +42,7 @@ export default function Explorar({ navigation }) {
             value={estado}
             onChangeText={setEstado}
           />
-          <Botao mt={3} mb={3} onPress={buscar}>
+          <Botao mt={3} mb={3} backgroundColor="red.500" onPress={buscar}>
             Buscar
           </Botao>
         </Box>

@@ -52,7 +52,7 @@ export default function Perfil({ navigation }) {
         }
 
         <Botao backgroundColor="red.500" borderRadius="5" w="400" onPress={deslogar}>
-          Deslogar
+          Sair
         </Botao>
       </VStack>
     </ScrollView>

@@ -1,7 +1,7 @@
 import Dipirona from "../assets/dipirona.png";
 import Ibuprofeno from "../assets/ibuprofeno.png";
 import Dorflex from "../assets/dorflex.png";
-
+import Amoxilina from "../assets/amoxil.png"
 import Ciprofloxacino from "../assets/ciprofloxacino.png";
 import Cefalexina from "../assets/Cefalexina.png";
 import Cetoprofeno from "../assets/cetoprofeno.png";
@@ -29,7 +29,7 @@ const Analgesicos = [
   },
   {
     id: 2,
-    nome: "Ibuprofeno",
+    nome: "Ibupril (Ibuprofeno)",
     description: "Ibupril 400mg 20 Cápsulas Moles",
     Titulo:
       "--Quais cuidados devo ter ao usar o Ibuprofeno Comprimido Neo Química--",
@@ -64,7 +64,7 @@ const Analgesicos = [
 const Antibioticos = [
   {
     id: 1,
-    nome: "Amoxicilina (Amoxil)",
+    nome: "Amoxil (Amoxicilina)",
     description: "AMOXIL GSK CAIXA 30 CÁPSULAS",
     Titulo: "--Amoxil, para o que é indicado e para o que serve?--",
     descricao:
@@ -75,11 +75,11 @@ const Antibioticos = [
     subtitulo3: "Quais as contraindicações do Amoxil?",
     Texto2:
       "Este medicamento não pode ser administrado nem ingerido por pessoas alérgicas à amoxicilina, a outros antibióticos penicilínicos ou antibióticos similares, chamados cefalosporinas. Se você já teve uma reação alérgica (como erupções da pele) ao tomar um antibiótico, deve conversar com seu médico antes de usar Amoxil®.",
-    imagem: 'Amoxilina',
+    imagem: Amoxilina,
   },
   {
     id: 2,
-    nome: "Ciprofloxacino (Cipro)",
+    nome: "Cipro (Ciprofloxacino)",
     description:
       "Cloridrato de Ciprofloxacino 500mg Pharlab com 14 comprimidos Revestidos",
     Titulo:
@@ -100,7 +100,7 @@ const Antibioticos = [
   },
   {
     id: 3,
-    nome: "Cefalexina (Keflex)",
+    nome: "Keflex (Cefalexina)",
     description: "Keflex Cefalexina 500mg 8 drágeas",
     Titulo: "--Keflex, para o que é indicado e para o que serve?--",
     descricao:

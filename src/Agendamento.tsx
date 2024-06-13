@@ -41,7 +41,7 @@ export default function Agendamento({ route, navigation }: any) {
             <EntradaTexto placeholder="Digite a data do pedido" onChangeText={setData} />
             <Box width={"100%"} p={1}>
               
-                <Botao onPress={agendar}>Confirmar Pedido</Botao>
+                <Botao backgroundColor="red.500" onPress={agendar}>Confirmar Pedido</Botao>
                 <Botao bgColor={'gray.300'} mt={5} onPress={() => navigation.goBack()}>Voltar</Botao>
             </Box>
            

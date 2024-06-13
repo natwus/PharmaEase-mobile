@@ -30,7 +30,7 @@ export function CardConsulta({
           <Text>{data}</Text>
         </VStack>
       </VStack>
-      <Botao mt={4} onPress={onPress}>
+      <Botao backgroundColor="red.500" mt={4} onPress={onPress}>
         {foiPedido ? 'Cancelar' : 'Fazer Pedido'}
       </Botao>
     </VStack>
