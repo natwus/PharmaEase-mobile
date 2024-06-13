@@ -31,6 +31,7 @@ const Analgesicos = [
     Titulo:'--Qual a composição do Dorflex--',
     descricao: '300 mg de dipirona monoidratada, 35 mg de citrato de orfenadrina (equivalente a 20,4 mg de orfenadrina base) e 50 mg de cafeína anidra. Excipientes: amido de milho, amidoglicolato de sódio, talco e estearato de magnésio.',
     Subtitulo:'--Superdose: o que acontece se tomar uma dose do Dorflex maior do que a recomendada--',
+    Texto:'A orfenadrina é uma droga potencialmente tóxica e há relatos de mortes associadas à superdose (ingestão de 2 a 3 g de uma só vez). Efeitos tóxicos podem ocorrer, rapidamente em 2 horas, em intoxicação aguda, com convulsões, arritmias cardíacas e morte.',
     imagem: Dorflex,
   }
 ];

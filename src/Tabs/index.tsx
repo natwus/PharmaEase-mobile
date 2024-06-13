@@ -1,16 +1,16 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Ionicons from 'react-native-vector-icons/Ionicons'
-
 import Principal from "./Principal";
 import Pedidos from "./Pedidos";
 import Explorar from "./Explorar";
 import Perfil from "./Perfil";
+import { TEMAS } from "../estilos/temas";
 
 const Tab = createBottomTabNavigator()
 
 const screenOptions = {
   tabBarStyle: {
-    backgroundColor: "#9D1A1A"
+    backgroundColor: "#DF0101"
   },
   tabBarActiveTintColor: "#FFB7B7",
   tabBarInactiveTintColor: "#FFF"

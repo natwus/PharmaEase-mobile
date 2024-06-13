@@ -92,7 +92,7 @@ export default function Cadastro({ navigation }: any) {
     <ScrollView flex={1} p={5}>
       <Image source={Logo} alt="Logo Voll" alignSelf="center" />
 
-      <Titulo>
+      <Titulo mt={0}>
         {secoes[numSecao].titulo}
       </Titulo>
       <Box>
@@ -136,8 +136,8 @@ export default function Cadastro({ navigation }: any) {
           })
         }
       </Box>
-      {numSecao == 0 && <Botao onPress={() => voltarSecao()} bgColor="gray.400">Voltar</Botao>}
-      <Botao onPress={() => avancarSecao()} mt={4} mb={20} backgroundColor="red.600">
+      {numSecao >= 0 && <Botao mt={5} onPress={() => voltarSecao()} bgColor="gray.400">Voltar</Botao>}
+      <Botao onPress={() => avancarSecao()} mt={3} mb={20} backgroundColor="red.600">
         {numSecao == 2 ? 'Finalizar' : 'Avançar'}
       </Botao>
     </ScrollView>
