@@ -51,7 +51,7 @@ export default function Perfil({ navigation }) {
           ))
         }
 
-        <Botao mt="15%" backgroundColor="red.500" borderRadius="30" w="350" onPress={deslogar}>
+        <Botao mt={5} mb={5} backgroundColor="red.500" borderRadius="30" w="350" onPress={deslogar}>
           <Text fontSize="lg" color="#fff">
             Sair
           </Text>
