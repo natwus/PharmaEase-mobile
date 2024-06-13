@@ -1,5 +1,5 @@
 import { VStack, Text, ScrollView, Avatar, Divider, Box } from 'native-base'
-import { Titulo } from '../componentes/Titulo'
+import { Titulo } from '../componentes/titulo'
 import { pegarDadosPaciente } from '../servicos/PacienteServico'
 import { useEffect, useState } from 'react'
 import AsyncStorage from '@react-native-async-storage/async-storage';

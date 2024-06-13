@@ -22,13 +22,13 @@ export default function Agendamento({ route, navigation }: any) {
         const resultado = await agendarConsulta(dataFormatada, especialistaId, pacieteId)
         if (resultado) {
             toast.show({
-                title: 'Consulta agendada com sucesso!',
+                title: 'Pedido efetuado com sucesso!',
                 backgroundColor: 'green.500'
             })
             return navigation.goBack();
         }
         toast.show({
-            title: 'Erro ao agendar consulta',
+            title: 'Erro ao fazer o pedido',
             description: 'Horário indisponível',
             backgroundColor: 'red.500'
         })
@@ -40,14 +40,12 @@ export default function Agendamento({ route, navigation }: any) {
             
             <EntradaTexto placeholder="Digite a data do pedido" onChangeText={setData} />
             <Box width={"100%"} p={1}>
+              
                 <Botao onPress={agendar}>Confirmar Pedido</Botao>
                 <Botao bgColor={'gray.300'} mt={5} onPress={() => navigation.goBack()}>Voltar</Botao>
             </Box>
-            <Box alignItems="center" mb={5}>
-                <Image source={{ uri: remedio.foto }} alt={remedio.nome} size="xl" />
-                <Titulo>{remedio.nome}</Titulo>
-                <Text>{remedio.description}</Text>
-            </Box>
+           
+            
         </VStack>
     )
 }

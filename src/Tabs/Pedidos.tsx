@@ -50,15 +50,15 @@ export default function Pedidos({ navigation }: NavigationProps<'Pedidos'>) {
     const resultado = await cancelarConsulta(consultaId);
     if (resultado) {
       toast.show({
-        title: "Consulta cancelada com sucesso!",
-        description: "Consulta cancelada",
+        title: "Pedido cancelado com sucesso!",
+        description: "Pedido cancelado",
         backgroundColor: "green.500"
       })
       setRecarregar(!recarregar);
     } else {
       toast.show({
-        title: 'Não foi possível cancelar a consulta',
-        description: "Não foi possível cancelar a consulta",
+        title: 'Não foi possível cancelar o Pedido',
+        description: "Não foi possível cancelar o Pedido",
       })
     }
   }

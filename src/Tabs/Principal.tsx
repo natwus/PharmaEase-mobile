@@ -7,7 +7,7 @@ import { Remedios } from '../remedios/Remedios';
 import { pegarDadosPaciente } from "../servicos/PacienteServico";
 import { Paciente } from '../interfaces/Paciente';
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { Antibioticos, Analgesicos } from "../utils/mock";
+import { Antibioticos, Analgesicos, AntiInflamatorios } from "../utils/mock";
 import MapView from "react-native-maps";
 import { Platform, PermissionsAndroid } from "react-native";
 
@@ -86,8 +86,32 @@ export default function Principal({ navigation }) {
         ) : (
           <>
             <Box w="100%" borderRadius="lg" p={5} shadow={1} mt={4}>
+            <Titulo mt={-1} mb={2} color='black' fontWeight='700'>ANALGESICOS</Titulo>
               <ScrollView horizontal showsHorizontalScrollIndicator={false}>
                 {Analgesicos?.map((remedio, index) => (
+                  <Box
+                    key={index}
+                    borderRadius="lg"
+                    p={3}
+                    shadow={1}
+                    bgColor={'green.100'}
+                    mr={4}
+                  >
+                    <Remedios
+                      nome={remedio.nome}
+                      foto={remedio.imagem}
+                      description={remedio.description}
+                      onPress={() => navigation.navigate('Bula',{remedio:remedio})} // Definir o remédio selecionado
+                    />
+                  </Box>
+                ))}
+              </ScrollView>
+            </Box>
+
+            <Box w="100%" borderRadius="lg" p={5} shadow={1} mt={5}>
+            <Titulo mt={-1} mb={2} color='black' fontWeight='700'>ANTIBIOTICOS</Titulo>
+              <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+                {Antibioticos?.map((remedio, index) => (
                   <Box
                     key={index}
                     borderRadius="lg"
@@ -109,8 +133,9 @@ export default function Principal({ navigation }) {
             </Box>
 
             <Box w="100%" borderRadius="lg" p={5} shadow={1} mt={5}>
+            <Titulo mt={-1} mb={2} color='black' fontWeight='700'>ANTI-INFLAMATORIOS</Titulo>
               <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-                {Antibioticos?.map((remedio, index) => (
+                {AntiInflamatorios?.map((remedio, index) => (
                   <Box
                     key={index}
                     borderRadius="lg"
