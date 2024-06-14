@@ -43,7 +43,7 @@ export default function Principal({ navigation }) {
     if (localizacao) {
       const latitude = localizacao.coords.latitude;
       const longitude = localizacao.coords.longitude;
-      const apiKey = 'AIzaSyCxLtUNc4NsU6mwOBA4c2l9sqEKvOvZ7Sw';
+      const apiKey = '';
       const raio = 2000;
 
       const url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${latitude},${longitude}&radius=${raio}&type=pharmacy&key=${apiKey}`;
