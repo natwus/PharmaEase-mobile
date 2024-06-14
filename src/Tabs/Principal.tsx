@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { VStack, Image, Box, ScrollView, Text } from "native-base";
+import { Animated, Easing } from 'react-native';
+import { VStack, Box, ScrollView, Image, Text } from "native-base";
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import MapView, { Marker } from "react-native-maps";
 import Logo from '../assets/Logo2 (2).png';
 import { Titulo } from "../componentes/titulo";
 import { Remedios } from '../remedios/Remedios';
@@ -9,9 +12,6 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { AntiInflamatorios } from "../utils/antiinflamatorio";
 import { Analgesicos } from "../utils/analgesicos";
 import { Antibioticos } from "../utils/antibioticos";
-import Ionicons from 'react-native-vector-icons/Ionicons';
-import { Animated, Easing } from 'react-native';
-import MapView, { Marker } from "react-native-maps";
 import { requestForegroundPermissionsAsync, getCurrentPositionAsync, watchPositionAsync, LocationAccuracy, LocationObject } from "expo-location";
 
 export default function Principal({ navigation }) {
@@ -19,41 +19,29 @@ export default function Principal({ navigation }) {
   const [remedioSelecionado, setRemedioSelecionado] = useState(null);
   const [localizacao, setLocalizacao] = useState<LocationObject | null>(null);
   const [farmacias, setFarmacias] = useState([]);
-
-  useEffect(() => {
-    async function fetchDadosPaciente() {
-      const pacienteId = await AsyncStorage.getItem('pacienteId');
-      if (!pacienteId) return null;
-
-      const resultado = await pegarDadosPaciente(pacienteId);
-      if (resultado) {
-        setDadosPaciente(resultado);
-      }
-    }
-    fetchDadosPaciente();
-  }, []);
-
   const spinValue = new Animated.Value(0);
 
-  useEffect(() => {
-    const animation = Animated.loop(
+  // Funções refatoradas
+  async function fetchDadosPaciente() {
+    const pacienteId = await AsyncStorage.getItem('pacienteId');
+    if (!pacienteId) return null;
+
+    const resultado = await pegarDadosPaciente(pacienteId);
+    if (resultado) {
+      setDadosPaciente(resultado);
+    }
+  }
+
+  function iniciarAnimacao() {
+    return Animated.loop(
       Animated.timing(spinValue, {
         toValue: 1,
         duration: 2000,
         easing: Easing.linear,
         useNativeDriver: true,
       })
-    );
-  
-    animation.start();
-  
-    return () => animation.stop();
-  }, [spinValue]);
-
-  const spin = spinValue.interpolate({
-    inputRange: [0, 1],
-    outputRange: ['0deg', '360deg'],
-  });
+    ).start();
+  }
 
   async function permissaoLocalizacao() {
     const { granted } = await requestForegroundPermissionsAsync();
@@ -64,43 +52,57 @@ export default function Principal({ navigation }) {
   }
 
   async function buscarFarmacias() {
-    if (localizacao) {
-      const latitude = localizacao.coords.latitude;
-      const longitude = localizacao.coords.longitude;
-      const apiKey = 'AIzaSyCxLtUNc4NsU6mwOBA4c2l9sqEKvOvZ7Sw';
-      const raio = 2000;
-
-      const url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${latitude},${longitude}&radius=${raio}&type=pharmacy&key=${apiKey}`;
-
-      try {
-        const response = await fetch(url);
-        const data = await response.json();
-        setFarmacias(data.results);
-      } catch (error) {
-        console.error('Erro ao buscar farmácias próximas:', error);
-      }
+    if (!localizacao) return;
+    
+    const latitude = localizacao.coords.latitude;
+    const longitude = localizacao.coords.longitude;
+    const apiKey = 'AIzaSyCxLtUNc4NsU6mwOBA4c2l9sqEKvOvZ7Sw';
+    const raio = 2000;
+    
+    const url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${latitude},${longitude}&radius=${raio}&type=pharmacy&key=${apiKey}`;
+    
+    try {
+      const response = await fetch(url);
+      const data = await response.json();
+      setFarmacias(data.results);
+    } catch (error) {
+      console.error('Erro ao buscar farmácias próximas:', error);
     }
   }
 
   useEffect(() => {
-    permissaoLocalizacao();
-  }, [])
+    fetchDadosPaciente();
+  }, []);
 
   useEffect(() => {
-    if (localizacao) {
-      buscarFarmacias();
-    }
+    const animacao = iniciarAnimacao();
+  }, []); 
+
+  useEffect(() => {
+    permissaoLocalizacao();
+  }, []);
+
+  useEffect(() => {
+    buscarFarmacias();
   }, [localizacao]);
 
   useEffect(() => {
-    watchPositionAsync({
+    let isMounted = true;
+    const subscription = watchPositionAsync({
       accuracy: LocationAccuracy.Highest,
       timeInterval: 1000,
       distanceInterval: 1
-    }, (response) => {
-      setLocalizacao(response)
+    }, (location) => {
+      if (isMounted) setLocalizacao(location);
     });
-  })
+
+    return () => {
+      isMounted = false;
+      subscription.then(sub => sub.remove());
+    };
+  }, []);
+
+  const spin = spinValue.interpolate({ inputRange: [0, 1], outputRange: ['0deg', '360deg'] });
 
   return (
     <ScrollView flex={1} bgColor="white">
