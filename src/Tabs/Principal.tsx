@@ -10,12 +10,13 @@ import { AntiInflamatorios } from "../utils/antiinflamatorio";
 import { Analgesicos } from "../utils/analgesicos";
 import { Antibioticos } from "../utils/antibioticos";
 import MapView, { Marker } from "react-native-maps";
-import { requestForegroundPermissionsAsync, getCurrentPositionAsync, LocationObject, watchPositionAsync, LocationAccuracy } from "expo-location";
-
+import { requestForegroundPermissionsAsync, getCurrentPositionAsync, watchPositionAsync, LocationAccuracy, LocationObject } from "expo-location";
 
 export default function Principal({ navigation }) {
   const [dadosPaciente, setDadosPaciente] = useState({} as Paciente);
   const [remedioSelecionado, setRemedioSelecionado] = useState(null);
+  const [localizacao, setLocalizacao] = useState<LocationObject | null>(null);
+  const [farmacias, setFarmacias] = useState([]);
 
   useEffect(() => {
     async function fetchDadosPaciente() {
@@ -30,8 +31,6 @@ export default function Principal({ navigation }) {
     fetchDadosPaciente();
   }, []);
 
-  const [localizacao, setLocalizacao] = useState<LocationObject | null>(null);
-
   async function permissaoLocalizacao() {
     const { granted } = await requestForegroundPermissionsAsync();
     if (granted) {
@@ -40,9 +39,34 @@ export default function Principal({ navigation }) {
     }
   }
 
+  async function buscarFarmacias() {
+    if (localizacao) {
+      const latitude = localizacao.coords.latitude;
+      const longitude = localizacao.coords.longitude;
+      const apiKey = 'AIzaSyCxLtUNc4NsU6mwOBA4c2l9sqEKvOvZ7Sw';
+      const raio = 2000;
+
+      const url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${latitude},${longitude}&radius=${raio}&type=pharmacy&key=${apiKey}`;
+
+      try {
+        const response = await fetch(url);
+        const data = await response.json();
+        setFarmacias(data.results);
+      } catch (error) {
+        console.error('Erro ao buscar farmácias próximas:', error);
+      }
+    }
+  }
+
   useEffect(() => {
     permissaoLocalizacao();
   }, [])
+
+  useEffect(() => {
+    if (localizacao) {
+      buscarFarmacias();
+    }
+  }, [localizacao]);
 
   useEffect(() => {
     watchPositionAsync({
@@ -66,17 +90,21 @@ export default function Principal({ navigation }) {
             initialRegion={{
               latitude: localizacao.coords.latitude,
               longitude: localizacao.coords.longitude,
-              latitudeDelta: 0.015,
-              longitudeDelta: 0.015
+              latitudeDelta: 0.008,
+              longitudeDelta: 0.008
             }}
             showsUserLocation={true}
           >
-            {/* <Marker
-              coordinate={{
-                latitude: localizacao.coords.latitude,
-                longitude: localizacao.coords.longitude
-              }}
-            /> */}
+            {farmacias.map((farmacia, index) => (
+              <Marker
+                key={index}
+                coordinate={{
+                  latitude: farmacia.geometry.location.lat,
+                  longitude: farmacia.geometry.location.lng
+                }}
+                title={farmacia.name}
+              />
+            ))}
           </MapView>
         }
         <Titulo mt={3} color="red.500" alignSelf="center">Remédios em destaque</Titulo>
@@ -86,7 +114,7 @@ export default function Principal({ navigation }) {
               nome={remedioSelecionado.nome}
               foto={remedioSelecionado.imagem}
               description={remedioSelecionado.description}
-              onPress={() => setRemedioSelecionado(null)} // Voltar para a lista completa
+              onPress={() => setRemedioSelecionado(null)}
             />
           </Box>
         ) : (
@@ -108,7 +136,7 @@ export default function Principal({ navigation }) {
                       nome={remedio.nome}
                       foto={remedio.imagem}
                       description={remedio.description}
-                      onPress={() => navigation.navigate('Bula', { remedio: remedio })} // Definir o remédio selecionado
+                      onPress={() => navigation.navigate('Bula', { remedio: remedio })}
                     />
                   </Box>
                 ))}
@@ -131,7 +159,7 @@ export default function Principal({ navigation }) {
                       nome={remedio.nome}
                       foto={remedio.imagem}
                       description={remedio.description}
-                      onPress={() => navigation.navigate('Bula', { remedio: remedio })} // Definir o remédio selecionado
+                      onPress={() => navigation.navigate('Bula', { remedio: remedio })}
                     />
                   </Box>
                 ))}
@@ -154,7 +182,7 @@ export default function Principal({ navigation }) {
                       nome={remedio.nome}
                       foto={remedio.imagem}
                       description={remedio.description}
-                      onPress={() => navigation.navigate('Bula', { remedio: remedio })} // Definir o remédio selecionado
+                      onPress={() => navigation.navigate('Bula', { remedio: remedio })}
                     />
 
                   </Box>
