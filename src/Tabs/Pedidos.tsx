@@ -7,6 +7,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { pegarConsultasPaciente } from '../servicos/PacienteServico';
 import { cancelarConsulta } from '../servicos/ConsultaServico';
 import { useIsFocused } from '@react-navigation/native';
+import { Botao } from '../componentes/Botao';
 
 interface Especialista {
   nome: string;
@@ -70,10 +71,8 @@ export default function Pedidos({ navigation }: NavigationProps<'Pedidos'>) {
           <Titulo color="red.500" fontSize="2xl" mb={5}>
             Meus Pedidos
           </Titulo>
-          <Button
+          <Botao
             onPress={() => navigation.navigate('Explorar')}
-            mt={5}
-            mb={5}
             backgroundColor="red.500"
             _text={{ color: "white" }}
             borderRadius="md"
@@ -82,8 +81,7 @@ export default function Pedidos({ navigation }: NavigationProps<'Pedidos'>) {
             shadow="3"
           >
             Fazer novo pedido
-          </Button>
-
+          </Botao>
           <Box>
             <Titulo color="red.500" fontSize="lg" mb={2} alignSelf="flex-start">
               Pedidos à caminho
@@ -104,9 +102,7 @@ export default function Pedidos({ navigation }: NavigationProps<'Pedidos'>) {
               </Text>
             )}
           </Box>
-
           <Divider mt={5} bg="gray.300" />
-
           <Box mt={5}>
             <Titulo color="red.500" fontSize="lg" mb={2} alignSelf="flex-start">
               Pedidos entregues

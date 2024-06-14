@@ -1,7 +1,6 @@
 import {
   Box,
   VStack,
-  useToast,
   Image,
   Text,
   ScrollView,
@@ -9,7 +8,6 @@ import {
 import { Titulo } from "./componentes/titulo";
 import React from "react";
 import { Botao } from "./componentes/Botao";
-
 
 export default function Bula({ route, navigation }: any) {
   const { remedio } = route.params; // Recebe o remédio selecionado
@@ -26,15 +24,11 @@ export default function Bula({ route, navigation }: any) {
     <ScrollView>
       <VStack flex={1} alignItems="center" justifyContent="center" padding={5} space={4}>
         <Image source={remedio.imagem} alt={remedio.nome} size="400px" />
-       
         <Titulo color={'black'}>{remedio.nome}</Titulo>
         {renderIfNotEmpty(remedio.description, Text)}
-
         <Titulo color='black' fontWeight='900'>--INFORMAÇÕES--</Titulo>
-        
         {renderIfNotEmpty(remedio.Titulo, Titulo, { fontSize: '15px', color: 'black', fontWeight: 900, mt: 30 })}
         {renderIfNotEmpty(remedio.descricao, Text)}
-        
         <Box flex={1} textAlign={'center'}>
           {renderIfNotEmpty(remedio.Subtitulo, Titulo, { fontSize: '15px', color: 'black', fontWeight: 900 })}
           {renderIfNotEmpty(remedio.Texto, Text)}
@@ -46,7 +40,6 @@ export default function Bula({ route, navigation }: any) {
           {renderIfNotEmpty(remedio.SubTitulo4, Titulo, { fontSize: '15px', color: 'black', fontWeight: 900 })} 
           {renderIfNotEmpty(remedio.Texto4, Text)}
         </Box>
-        
         <Botao onPress={Voltar} mt={2}>Voltar</Botao>
       </VStack>
     </ScrollView>

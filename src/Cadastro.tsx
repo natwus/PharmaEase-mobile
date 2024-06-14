@@ -35,6 +35,8 @@ export default function Cadastro({ navigation }: any) {
   function voltarSecao() {
     if (numSecao > 0) {
       setNumSecao(numSecao - 1)
+    } else if (numSecao === 0) {
+      navigation.goBack()
     }
   }
 
@@ -137,7 +139,15 @@ export default function Cadastro({ navigation }: any) {
         }
       </Box>
       {numSecao >= 0 && <Botao mt={5} onPress={() => voltarSecao()} bgColor="gray.400">Voltar</Botao>}
-      <Botao onPress={() => avancarSecao()} mt={3} mb={20} backgroundColor="red.600">
+      <Botao
+        onPress={() => avancarSecao()}
+        backgroundColor="red.500"
+        _text={{ color: "white" }}
+        borderRadius="md"
+        _hover={{ backgroundColor: "red.600" }}
+        _pressed={{ backgroundColor: "red.700" }}
+        mt={5}
+        mb={15}>
         {numSecao == 2 ? 'Finalizar' : 'Avançar'}
       </Botao>
     </ScrollView>

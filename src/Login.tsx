@@ -9,7 +9,6 @@ import { fazerLogin } from './servicos/AutenticacaoServico';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { jwtDecode } from 'jwt-decode';
 
-
 export default function Login({ navigation }: any) {
   const [email, setEmail] = useState('')
   const [senha, setSenha] = useState('')
@@ -53,7 +52,7 @@ export default function Login({ navigation }: any) {
 
   return (
     <VStack flex={1} alignItems="center" justifyContent="center" p={5}>
-      <Image source={Logo} alt="Logo Voll" mr={8}  mb={10}/>
+      <Image source={Logo} alt="Logo Voll" mr={8} mb={10} />
 
       <Titulo>
         Faça login em sua conta
@@ -73,12 +72,18 @@ export default function Login({ navigation }: any) {
           secureTextEntry
         />
       </Box>
-      <Botao onPress={login} backgroundColor="red.600">Entrar</Botao>
-
+      <Botao
+        onPress={login}
+        backgroundColor="red.500"
+        _text={{ color: "white" }}
+        borderRadius="md"
+        _hover={{ backgroundColor: "red.600" }}
+        _pressed={{ backgroundColor: "red.700" }}
+        shadow="3"
+      >Entrar</Botao>
       <Link href='https://www.google.com.br' mt={2}>
         Esqueceu sua senha?
       </Link>
-
       <Box w="100%" flexDirection="row" justifyContent="center" mt={8}>
         <Text>Ainda não tem cadastro? </Text>
         <TouchableOpacity onPress={() => navigation.navigate('Cadastro')}>

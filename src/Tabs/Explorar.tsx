@@ -3,6 +3,7 @@ import { CardConsulta } from "../componentes/CardRemédio";
 import { buscarEspecialistaPorEstado } from "../servicos/EspecialistaServico";
 import { useState } from "react";
 import { Botao } from "../componentes/Botao";
+import { EntradaTexto } from "../componentes/EntradaTexto";
 
 interface Especialista {
   nome: string,
@@ -36,35 +37,15 @@ export default function Explorar({ navigation }) {
                 end: [1, 0],
               },
             }}>
-            <Input
+            <EntradaTexto
               placeholder="Digite a categoria do remédio"
               value={especialidade}
               onChangeText={setEspecialidade}
-              borderColor="gray.300"
-              bgColor="white"
-              color="black"
-              mb={4}
-              borderRadius="md"
-              px={4}
-              py={3}
-              _hover={{ borderColor: "gray.400" }}
-              _focus={{ borderColor: "red.500" }}
-              shadow="2"
             />
-            <Input
+            <EntradaTexto
               placeholder="Digite o tipo de remédio"
               value={estado}
               onChangeText={setEstado}
-              borderColor="gray.300"
-              bgColor="white"
-              color="black"
-              mb={4}
-              borderRadius="md"
-              px={4}
-              py={3}
-              _hover={{ borderColor: "gray.400" }}
-              _focus={{ borderColor: "red.500" }}
-              shadow="2"
             />
             <Botao
                 mt={4} 
@@ -79,7 +60,6 @@ export default function Explorar({ navigation }) {
               Buscar
             </Botao>
           </Box>
-
           <Text color="red.500" alignSelf="center" mt={5} fontSize="2xl" bold>
             Resultado da Busca
           </Text>

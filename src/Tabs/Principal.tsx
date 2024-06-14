@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { VStack, Image, Box, ScrollView } from "native-base";
+import { VStack, Image, Box, ScrollView, Text } from "native-base";
 import Logo from '../assets/Logo2 (2).png';
 import { Titulo } from "../componentes/titulo";
 import { Remedios } from '../remedios/Remedios';
@@ -44,12 +44,12 @@ export default function Principal({ navigation }) {
     permissaoLocalizacao();
   }, [])
 
-  useEffect(()=>{
+  useEffect(() => {
     watchPositionAsync({
       accuracy: LocationAccuracy.Highest,
       timeInterval: 1000,
       distanceInterval: 1
-    }, (response)=>{
+    }, (response) => {
       setLocalizacao(response)
     });
   })
@@ -59,7 +59,7 @@ export default function Principal({ navigation }) {
       <VStack flex={1} alignItems="flex-start" justifyContent="flex-start" p={5}>
         <Image source={Logo} alt="Logo" />
         <Titulo color="red.500">Boas-vindas, {dadosPaciente.nome}!</Titulo>
-
+        <Text>Veja farmácias próximas:</Text>
         {localizacao &&
           <MapView
             style={{ width: '100%', height: 180, marginTop: 5 }}
@@ -79,9 +79,7 @@ export default function Principal({ navigation }) {
             /> */}
           </MapView>
         }
-
         <Titulo mt={3} color="red.500" alignSelf="center">Remédios em destaque</Titulo>
-
         {remedioSelecionado ? (
           <Box w="100%" borderRadius="lg" p={5} shadow={1} mt={4} bgColor={'green.100'}>
             <Remedios
@@ -94,7 +92,7 @@ export default function Principal({ navigation }) {
         ) : (
           <>
             <Box w="100%" borderRadius="lg" p={5} shadow={1} mt={4}>
-            <Titulo mt={-1} mb={2} color='black' fontWeight='700'>ANALGÉSICOS</Titulo>
+              <Titulo mt={-1} mb={2} color='black' fontWeight='700'>ANALGÉSICOS</Titulo>
               <ScrollView horizontal showsHorizontalScrollIndicator={false}>
                 {Analgesicos?.map((remedio, index) => (
                   <Box
@@ -110,15 +108,14 @@ export default function Principal({ navigation }) {
                       nome={remedio.nome}
                       foto={remedio.imagem}
                       description={remedio.description}
-                      onPress={() => navigation.navigate('Bula',{remedio:remedio})} // Definir o remédio selecionado
+                      onPress={() => navigation.navigate('Bula', { remedio: remedio })} // Definir o remédio selecionado
                     />
                   </Box>
                 ))}
               </ScrollView>
             </Box>
-
             <Box w="100%" borderRadius="lg" p={5} shadow={1} mt={5}>
-            <Titulo mt={-1} mb={2} color='black' fontWeight='700'>ANTIBIÓTICOS</Titulo>
+              <Titulo mt={-1} mb={2} color='black' fontWeight='700'>ANTIBIÓTICOS</Titulo>
               <ScrollView horizontal showsHorizontalScrollIndicator={false}>
                 {Antibioticos?.map((remedio, index) => (
                   <Box
@@ -134,15 +131,14 @@ export default function Principal({ navigation }) {
                       nome={remedio.nome}
                       foto={remedio.imagem}
                       description={remedio.description}
-                      onPress={() => navigation.navigate('Bula',{remedio:remedio})} // Definir o remédio selecionado
+                      onPress={() => navigation.navigate('Bula', { remedio: remedio })} // Definir o remédio selecionado
                     />
                   </Box>
                 ))}
               </ScrollView>
             </Box>
-
             <Box w="100%" borderRadius="lg" p={5} shadow={1} mt={5}>
-            <Titulo mt={-1} mb={2} color='black' fontWeight='700'>ANTI-INFLAMATÓRIOS</Titulo>
+              <Titulo mt={-1} mb={2} color='black' fontWeight='700'>ANTI-INFLAMATÓRIOS</Titulo>
               <ScrollView horizontal showsHorizontalScrollIndicator={false}>
                 {AntiInflamatorios?.map((remedio, index) => (
                   <Box
@@ -158,9 +154,9 @@ export default function Principal({ navigation }) {
                       nome={remedio.nome}
                       foto={remedio.imagem}
                       description={remedio.description}
-                      onPress={() => navigation.navigate('Bula',{remedio:remedio})} // Definir o remédio selecionado
+                      onPress={() => navigation.navigate('Bula', { remedio: remedio })} // Definir o remédio selecionado
                     />
-                  
+
                   </Box>
                 ))}
               </ScrollView>
