@@ -39,7 +39,7 @@ export default function Contato({ navigation }) {
       <Center flex={1} py={10}>
         <VStack w="90%" borderRadius="xl" p={8} shadow="5" bgColor="white" space={4}>
           <Titulo fontSize="2xl" color="red.500" mb={5}>
-            Contato
+            CONTATO
           </Titulo>
           <EntradaTexto
             placeholder="Nome"
