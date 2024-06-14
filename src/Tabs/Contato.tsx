@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { VStack, Input, Button, Box, Text, ScrollView, Center, useToast } from 'native-base';
-import { Titulo } from '../componentes/titulo';
+import { Titulo } from '../componentes/Titulo';
 import { EntradaTexto } from '../componentes/EntradaTexto';
 import { Botao } from '../componentes/Botao';
 
