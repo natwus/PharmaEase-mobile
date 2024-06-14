@@ -36,14 +36,18 @@ export default function Principal({ navigation }) {
   const spinValue = new Animated.Value(0);
 
   useEffect(() => {
-    Animated.loop(
+    const animation = Animated.loop(
       Animated.timing(spinValue, {
         toValue: 1,
         duration: 2000,
         easing: Easing.linear,
         useNativeDriver: true,
       })
-    ).start();
+    );
+  
+    animation.start();
+  
+    return () => animation.stop();
   }, [spinValue]);
 
   const spin = spinValue.interpolate({
