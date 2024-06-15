@@ -1,16 +1,22 @@
 import React, { useState } from 'react';
-import { VStack, Input, Button, Box, Text, ScrollView, Center, useToast } from 'native-base';
-import { Titulo } from '../componentes/Titulo';
+import { VStack, ScrollView, Center, useToast } from 'native-base';
+import { Titulo } from '../componentes/titulo';
 import { EntradaTexto } from '../componentes/EntradaTexto';
 import { Botao } from '../componentes/Botao';
+import * as MailComposer from 'expo-mail-composer';
 
-export default function Contato({ navigation }) {
+export default function Contato() {
   const [nome, setNome] = useState('');
   const [email, setEmail] = useState('');
   const [mensagem, setMensagem] = useState('');
   const toast = useToast();
 
-  const EnviarMensagem = () => {
+  const EnviarMensagem = async () => {
+    await MailComposer.composeAsync({
+      recipients: [email],
+      subject: nome,
+      body: mensagem
+    })
     if (!nome || !email || !mensagem) {
       toast.show({
         title: "Erro",
@@ -18,22 +24,23 @@ export default function Contato({ navigation }) {
         backgroundColor: "red.500",
         duration: 3000
       });
-      return; 
-    }
+      return;
+    } else {
 
-    toast.show({
-      title: "Mensagem enviada",
-      description: "Obrigado por entrar em contato!",
-      backgroundColor: "green.500",
-      duration: 3000
-    });
+      toast.show({
+        title: "Mensagem enviada",
+        description: "Obrigado por entrar em contato!",
+        backgroundColor: "green.500",
+        duration: 3000
+      });
+    }
 
     setNome('');
     setEmail('');
     setMensagem('');
 
   };
-  
+
   return (
     <ScrollView flex={1} bgColor="#f0f0f0">
       <Center flex={1} py={10}>
@@ -64,7 +71,7 @@ export default function Contato({ navigation }) {
             _hover={{ backgroundColor: "red.600" }}
             _pressed={{ backgroundColor: "red.700" }}
             shadow="3"
-            mb={2} 
+            mb={2}
           >
             Enviar Mensagem
           </Botao>
