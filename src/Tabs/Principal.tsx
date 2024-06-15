@@ -21,7 +21,6 @@ export default function Principal({ navigation }) {
   const [farmacias, setFarmacias] = useState([]);
   const spinValue = new Animated.Value(0);
 
-  // Funções refatoradas
   async function fetchDadosPaciente() {
     const pacienteId = await AsyncStorage.getItem('pacienteId');
     if (!pacienteId) return null;

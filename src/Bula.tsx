@@ -37,10 +37,18 @@ export default function Bula({ route, navigation }: any) {
           {renderIfNotEmpty(remedio.subtitulo3, Titulo, { fontSize: '15px', color: 'black', fontWeight: 900 })}
           {renderIfNotEmpty(remedio.Texto2, Text)}
           {renderIfNotEmpty(remedio.TextoD, Text)}
-          {renderIfNotEmpty(remedio.SubTitulo4, Titulo, { fontSize: '15px', color: 'black', fontWeight: 900 })} 
+          {renderIfNotEmpty(remedio.SubTitulo4, Titulo, { fontSize: '15px', color: 'black', fontWeight: 900 })}
           {renderIfNotEmpty(remedio.Texto4, Text)}
         </Box>
-        <Botao onPress={Voltar} mt={2}>Voltar</Botao>
+        <Botao
+          onPress={Voltar}
+          backgroundColor="red.500"
+          _text={{ color: "white" }}
+          borderRadius="md"
+          _hover={{ backgroundColor: "red.600" }}
+          _pressed={{ backgroundColor: "red.700" }}
+          shadow="3"
+        >Voltar</Botao>
       </VStack>
     </ScrollView>
   );

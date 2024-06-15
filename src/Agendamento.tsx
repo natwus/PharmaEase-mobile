@@ -36,7 +36,7 @@ export default function Agendamento({ route, navigation }: any) {
     return (
         <VStack flex={1} alignItems="center" justifyContent="center" padding={5}>
             <Titulo color={'red.500'}>Fazer Pedido</Titulo>
-            <EntradaTexto placeholder="Digite a data do pedido" onChangeText={setData} />
+            <EntradaTexto placeholder="Digite a data do pedido (DD/MM/AAAA HH:MM)" onChangeText={setData} />
             <Box width={"100%"} p={1}>
                 <Botao
                     bgColor={'gray.300'}
