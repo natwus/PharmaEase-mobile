@@ -16,7 +16,6 @@ export function Remedios({ nome, foto, description, onPress }: CardProps) {
         <Image 
           source={foto} 
           style={{ width:200, height: 200, borderRadius: 25 }} 
-          
         />
         <VStack pl="4" maxW="230px">
           <Text fontSize="md" bold>{nome}</Text>

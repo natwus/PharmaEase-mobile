@@ -4,7 +4,7 @@ import React from 'react';
 import { Box, ScrollView } from 'native-base';
 import { Remedios } from '../remedios/Remedios';
 
-const AntibioticosDisplay = ({ antibioticos, navigation, agendar }) => {
+const AntibioticosDisplay = ({ antibioticos, agendar }) => {
   return (
     <Box w="100%" borderRadius="lg" p={5} shadow={1} mt={4}>
       <ScrollView horizontal showsHorizontalScrollIndicator={false}>
@@ -14,7 +14,7 @@ const AntibioticosDisplay = ({ antibioticos, navigation, agendar }) => {
               nome={remedio.nome}
               foto={remedio.imagem}
               description={remedio.description}
-              onPress={() => agendar(remedio)} // Passa o remédio como parâmetro
+              onPress={() => agendar(remedio)}
             />
           </Box>
         ))}

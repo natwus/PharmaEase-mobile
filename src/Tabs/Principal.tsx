@@ -47,16 +47,21 @@ export default function Principal({ navigation }) {
     const apiKey = 'AIzaSyCxLtUNc4NsU6mwOBA4c2l9sqEKvOvZ7Sw';
     const raio = 2000;
 
-    const url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${latitude},${longitude}&radius=${raio}&type=pharmacy&key=${apiKey}`;
+    const url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${latitude},${longitude}&radius=${raio}&type=pharmacy&key=${apiKey}`; //url de requisição do que esta no type
 
     try {
       const response = await fetch(url);
       const data = await response.json();
-      setFarmacias(data.results);
+      setFarmacias(data.results); //coloca valor no usestate
     } catch (error) {
       console.error('Erro ao buscar farmácias próximas:', error);
     }
   }
+  
+  const spin = spinValue.interpolate({
+    inputRange: [0, 1],
+    outputRange: ['0deg', '360deg'],
+  });
 
   useEffect(() => {
     Animated.loop(
@@ -67,34 +72,29 @@ export default function Principal({ navigation }) {
         useNativeDriver: true,
       })
     ).start();
-  }, [spinValue]);
-
-  const spin = spinValue.interpolate({
-    inputRange: [0, 1],
-    outputRange: ['0deg', '360deg'],
-  });
+  }, [spinValue]); //animação enquanto o mapa esta aguardando a permissao da loc
 
   useEffect(() => {
     fetchDadosPaciente();
   }, []);
-
+                            //useeffects que iniciam ao montar o componente
   useEffect(() => {
     permissaoLocalizacao();
   }, []);
 
   useEffect(() => {
     buscarFarmacias();
-  }, [localizacao]);
+  }, [localizacao]); //busca as farmaciacias quando a loc é atualizada
 
   useEffect(() => {
     let isMounted = true;
     const subscription = watchPositionAsync({
       accuracy: LocationAccuracy.Highest,
-      timeInterval: 1000,
+      timeInterval: 1000, //delay de 1000ms
       distanceInterval: 1
     }, (location) => {
       if (isMounted) setLocalizacao(location);
-    });
+    }); //observa a posição do usuário
 
     return () => {
       isMounted = false;
@@ -108,6 +108,7 @@ export default function Principal({ navigation }) {
         <Image source={Logo} alt="Logo" />
         <Titulo color="red.500">Boas-vindas, {dadosPaciente.nome}!</Titulo>
         <Text>Veja farmácias próximas:</Text>
+        {/* (operador ternário) se a loc for aceita, renderiza o mapa, senao fica na animação */}
         {localizacao ? (
           (
             <MapView

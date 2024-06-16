@@ -11,6 +11,7 @@ export default function Contato() {
   const toast = useToast();
 
   const EnviarMensagem = async () => {
+    // verificar campo vazio
     if (!nome || !email || !mensagem) {
       toast.show({
         title: "Erro",
@@ -22,12 +23,13 @@ export default function Contato() {
     }
 
     try {
+      // const faz uma requisição pra api e envia os dados preenchidos
       const response = await fetch('http://192.168.1.107:4000/send-email', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
+        body: JSON.stringify({ //transforma objeto em json
           to: 'biotech.pharmaease@gmail.com',
           subject: `Mensagem de ${nome}, ${email}`,
           text: mensagem,
@@ -45,7 +47,7 @@ export default function Contato() {
           description: "Mensagem enviada com êxito!",
           backgroundColor: "green.500",
           duration: 3000
-        });
+        }); //se for tudo certo limpa os campos
       } else {
         throw new Error(data.error || 'Erro ao enviar o e-mail');
       }
