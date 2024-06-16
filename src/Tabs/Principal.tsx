@@ -31,17 +31,6 @@ export default function Principal({ navigation }) {
     }
   }
 
-  function iniciarAnimacao() {
-    return Animated.loop(
-      Animated.timing(spinValue, {
-        toValue: 1,
-        duration: 2000,
-        easing: Easing.linear,
-        useNativeDriver: true,
-      })
-    ).start();
-  }
-
   async function permissaoLocalizacao() {
     const { granted } = await requestForegroundPermissionsAsync();
     if (granted) {
@@ -52,14 +41,14 @@ export default function Principal({ navigation }) {
 
   async function buscarFarmacias() {
     if (!localizacao) return;
-    
+
     const latitude = localizacao.coords.latitude;
     const longitude = localizacao.coords.longitude;
     const apiKey = 'AIzaSyCxLtUNc4NsU6mwOBA4c2l9sqEKvOvZ7Sw';
     const raio = 2000;
-    
+
     const url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${latitude},${longitude}&radius=${raio}&type=pharmacy&key=${apiKey}`;
-    
+
     try {
       const response = await fetch(url);
       const data = await response.json();
@@ -70,12 +59,24 @@ export default function Principal({ navigation }) {
   }
 
   useEffect(() => {
-    fetchDadosPaciente();
-  }, []);
+    Animated.loop(
+      Animated.timing(spinValue, {
+        toValue: 1,
+        duration: 2000,
+        easing: Easing.linear,
+        useNativeDriver: true,
+      })
+    ).start();
+  }, [spinValue]);
+
+  const spin = spinValue.interpolate({
+    inputRange: [0, 1],
+    outputRange: ['0deg', '360deg'],
+  });
 
   useEffect(() => {
-    const animacao = iniciarAnimacao();
-  }, []); 
+    fetchDadosPaciente();
+  }, []);
 
   useEffect(() => {
     permissaoLocalizacao();
@@ -100,8 +101,6 @@ export default function Principal({ navigation }) {
       subscription.then(sub => sub.remove());
     };
   }, []);
-
-  const spin = spinValue.interpolate({ inputRange: [0, 1], outputRange: ['0deg', '360deg'] });
 
   return (
     <ScrollView flex={1} bgColor="white">
@@ -135,7 +134,7 @@ export default function Principal({ navigation }) {
           )
         ) : (
           <Animated.View style={{ transform: [{ rotate: spin }], alignSelf: 'center', padding: 30 }}>
-            <Ionicons name="reload" size={54} color="black"  
+            <Ionicons name="reload" size={54} color="black"
             />
           </Animated.View>
         )}
