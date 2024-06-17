@@ -29,7 +29,7 @@ export default function Contato() {
 
   const EnviarMensagem = async () => {
     // verificar campo vazio
-    if (!nome || !email || !mensagem) {
+    if (!nome || !mensagem) {
       toast.show({
         title: "Erro",
         description: "Todos os campos são obrigatórios",
@@ -48,7 +48,7 @@ export default function Contato() {
         },
         body: JSON.stringify({ //transforma objeto em json
           to: 'biotech.pharmaease@gmail.com',
-          subject: `Mensagem de ${nome}, ${email}`,
+          subject: `Mensagem de ${nome}, ${dadosPaciente.email}`,
           text: mensagem,
         }),
       });
