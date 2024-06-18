@@ -41,13 +41,13 @@ export default function Contato() {
 
     try {
       // const faz uma requisição pra api e envia os dados preenchidos
-      const response = await fetch('http://192.168.1.107:4000/send-email', {
+      const response = await fetch('http://ip_do_seu_computador:4000/send-email', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ //transforma objeto em json
-          to: 'biotech.pharmaease@gmail.com',
+          to: 'seu_email',
           subject: `Mensagem de ${nome}, ${dadosPaciente.email}`,
           text: mensagem,
         }),
